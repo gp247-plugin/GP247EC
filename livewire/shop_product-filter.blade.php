@@ -1,17 +1,18 @@
 {{--
-    GP247-EC listing (Livewire ProductFilter): marketplace two-column layout —
-    a filter sidebar (keyword, price range, brands as a check list) and, on the
-    right, a black sort bar with the result count above a dense product grid.
+    GP247-EC listing (Livewire ProductFilter): a filter sidebar (keyword, price
+    range, brands as a check list) and the results (sort bar + dense grid).
+    WHY the root is `display: contents`: the page (screen/shop_product_list,
+    shop_search) owns the two-column grid, so its left-position layout blocks can
+    sit under this sidebar in the same column. The aside and the results are the
+    grid items; loading feedback is set on each of them.
     All wire: bindings and data-testid hooks of the component contract are kept.
 --}}
-<div wire:loading.class="opacity-60 pointer-events-none" class="transition-opacity" x-data="{ filtersOpen: false }">
+<div class="contents" x-data="{ filtersOpen: false }">
     @php($currencySymbol = gp247_currency_info()['symbol'] ?? gp247_currency_code())
     @php($ecFiltered = $sort !== '' || $price !== '' || $brand !== '' || $keyword !== '')
 
-    <div class="grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)] gap-4 items-start">
-
         {{-- Filter sidebar (drawer on phones) --}}
-        <aside class="card overflow-hidden lg:sticky-top" :class="filtersOpen ? '' : 'hidden lg:block'" data-testid="shop-product-filter">
+        <aside wire:loading.class="opacity-60 pointer-events-none" class="card overflow-hidden transition-opacity lg:col-start-1 lg:row-start-1" :class="filtersOpen ? '' : 'hidden lg:block'" data-testid="shop-product-filter">
             <div class="flex items-center justify-between gap-2 ec-bar px-4 py-3 text-ink-900">
                 <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-wide">
                     <svg class="w-4 h-4 text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
@@ -70,7 +71,7 @@
         </aside>
 
         {{-- Results --}}
-        <div class="min-w-0">
+        <div wire:loading.class="opacity-60 pointer-events-none" class="min-w-0 transition-opacity lg:col-start-2 lg:row-start-1 lg:row-span-2">
             <div class="mb-3 flex flex-wrap items-center gap-3 rounded border border-ink-200/70 bg-white px-3 py-2 text-ink-800">
                 <button type="button" @click="filtersOpen = !filtersOpen" class="lg:hidden flex items-center gap-1.5 rounded-sm border border-ink-300 px-3 py-1.5 text-xs font-semibold">
                     <svg class="w-3.5 h-3.5 text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
@@ -117,7 +118,6 @@
             </div>
             @endif
         </div>
-    </div>
 
     <div wire:loading class="fixed inset-0 z-40 pointer-events-none"></div>
 </div>

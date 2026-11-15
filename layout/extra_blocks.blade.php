@@ -2,10 +2,12 @@
     GP247-EC: pages whose main area is one full-width component (product listing,
     search, product detail) still render the layout blocks the site owner filed
     under left / center / right for that page — below the main content, as shelves.
+    Pass ['ecSkipLeft' => true] when the page already shows its left blocks
+    (listing and search put them under the filter column).
 --}}
 @php
     $ecExtra = array_filter([
-        gp247_render_block('left', $layout_page ?? null),
+        empty($ecSkipLeft) ? gp247_render_block('left', $layout_page ?? null) : '',
         gp247_render_block('center', $layout_page ?? null),
         gp247_render_block('right', $layout_page ?? null),
     ], fn ($html) => trim($html) !== '');
