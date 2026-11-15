@@ -1,0 +1,152 @@
+{{--
+    Order detail for the signed-in customer: contact / shipping info, order lines
+    (with product attributes) and totals. Optional fields follow the
+    customer_* settings (gp247_config()).
+
+    Variables:
+    - $order, $statusOrder, $statusShipping, $countries, $attributesGroup, $title
+--}}
+@php
+    $view = gp247_shop_process_view($GP247TemplatePath, 'account.shop_layout');
+@endphp
+@extends($view)
+
+@section('block_main_profile')
+@if (!$order)
+    <div class="card p-10 text-center text-ink-500">{{ gp247_language_render('front.no_item') }}</div>
+@else
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div class="card p-4">
+            <table class="w-full text-sm">
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.first_name') }}</td><td class="py-1 font-medium">{{ $order->first_name }}</td></tr>
+                @if (gp247_config('customer_lastname'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.last_name') }}</td><td class="py-1 font-medium">{{ $order->last_name }}</td></tr>
+                @endif
+                @if (gp247_config('customer_phone'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.phone') }}</td><td class="py-1 font-medium">{{ $order->phone }}</td></tr>
+                @endif
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.email') }}</td><td class="py-1 font-medium">{{ empty($order->email) ? 'N/A' : $order->email }}</td></tr>
+                @if (gp247_config('customer_company'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.company') }}</td><td class="py-1 font-medium">{{ $order->company }}</td></tr>
+                @endif
+                @if (gp247_config('customer_postcode'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.postcode') }}</td><td class="py-1 font-medium">{{ $order->postcode }}</td></tr>
+                @endif
+                @if (gp247_config('customer_city'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.city') }}</td><td class="py-1 font-medium">{{ $order->city }}</td></tr>
+                @endif
+                @if (gp247_config('customer_district'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.district') }}</td><td class="py-1 font-medium">{{ $order->district }}</td></tr>
+                @endif
+                @if (gp247_config('customer_ward'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.ward') }}</td><td class="py-1 font-medium">{{ $order->ward }}</td></tr>
+                @endif
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.address1') }}</td><td class="py-1 font-medium">{{ $order->address1 }}</td></tr>
+                @if (gp247_config('customer_address2'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.address2') }}</td><td class="py-1 font-medium">{{ $order->address2 }}</td></tr>
+                @endif
+                @if (gp247_config('customer_address3'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.address3') }}</td><td class="py-1 font-medium">{{ $order->address3 }}</td></tr>
+                @endif
+                @if (gp247_config('customer_country'))
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.country') }}</td><td class="py-1 font-medium">{{ $countries[$order->country] ?? $order->country }}</td></tr>
+                @endif
+            </table>
+        </div>
+        <div class="card p-4">
+            <table class="w-full text-sm">
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.order_status') }}</td><td class="py-1 font-medium"><span class="badge-brand">{{ $statusOrder[$order->status] }}</span></td></tr>
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.shipping_status') }}</td><td class="py-1 font-medium">{{ $statusShipping[$order->shipping_status] ?? '' }}</td></tr>
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.shipping_method') }}</td><td class="py-1 font-medium">{{ $order->shipping_method }}</td></tr>
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.payment_method') }}</td><td class="py-1 font-medium">{{ $order->payment_method }}</td></tr>
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.currency') }}</td><td class="py-1 font-medium">{{ $order->currency }}</td></tr>
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.exchange_rate') }}</td><td class="py-1 font-medium">{{ $order->exchange_rate ?? 1 }}</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card overflow-x-auto mb-6">
+        <table class="w-full text-sm">
+            <thead class="bg-ink-50 text-ink-500 text-[11px] uppercase tracking-wide border-b border-ink-200">
+                <tr>
+                    <th class="text-start px-4 py-3">{{ gp247_language_render('product.name') }}</th>
+                    <th class="text-start px-4 py-3">{{ gp247_language_render('product.sku') }}</th>
+                    <th class="text-end px-4 py-3">{{ gp247_language_render('product.price') }}</th>
+                    <th class="text-end px-4 py-3">{{ gp247_language_render('product.quantity') }}</th>
+                    <th class="text-end px-4 py-3">{{ gp247_language_render('order.totals.sub_total') }}</th>
+                    <th class="text-end px-4 py-3">{{ gp247_language_render('product.tax') }}</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-ink-100">
+                @foreach ($order->details as $item)
+                    <tr>
+                        <td class="px-4 py-3">
+                            {{ $item->name }}
+                            @php
+                                $html = '';
+                                if ($item->attribute && is_array(json_decode($item->attribute, true))) {
+                                    $array = json_decode($item->attribute, true);
+                                    foreach ($array as $key => $element) {
+                                        // WHY: render the option through gp247_render_option_price so
+                                        // the raw "name__add_price" string never leaks (bug fix, DT-4);
+                                        // append the snapshot slug (3rd segment, escaped) when present.
+                                        $slug = explode('__', (string) $element)[2] ?? '';
+                                        $slugHtml = $slug !== ''
+                                            ? ' <span class="text-ink-300" data-testid="storefront-account-order-attribute-slug">('.e($slug).')</span>'
+                                            : '';
+                                        $html .= '<br><span class="text-xs text-ink-400">'.e($attributesGroup[$key]).': '.gp247_render_option_price($element, $order->currency).$slugHtml.'</span>';
+                                    }
+                                }
+                            @endphp
+                            {!! $html !!}
+                        </td>
+                        <td class="px-4 py-3 text-ink-500">{{ $item->sku }}</td>
+                        <td class="px-4 py-3 text-end">{{ $item->price }}</td>
+                        <td class="px-4 py-3 text-end">x {{ rtrim(rtrim(number_format($item->qty, 2, '.', ''), '0'), '.') }}</td>
+                        <td class="px-4 py-3 text-end font-semibold">{{ gp247_currency_render_symbol($item->total_price, $order->currency) }}</td>
+                        <td class="px-4 py-3 text-end">{{ $item->tax }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    @php
+        $dataTotal = \GP247\Shop\Models\ShopOrderTotal::getTotal($order->id);
+    @endphp
+    <div class="card p-4 max-w-sm ms-auto">
+        <table class="w-full text-sm">
+            @foreach ($dataTotal as $element)
+                @if (in_array($element['code'], ['subtotal', 'tax']))
+                    <tr><td class="py-1 text-ink-500">{{ $element['title'] }}</td><td class="py-1 text-end">{{ gp247_currency_format($element['value']) }}</td></tr>
+                @endif
+                @if ($element['code'] == 'shipping')
+                    <tr><td class="py-1 text-ink-500">{{ $element['title'] }}</td><td class="py-1 text-end">{{ gp247_currency_format($element['value']) }}</td></tr>
+                @endif
+                {{-- Stored as a magnitude; the minus is rendered from the code, not read
+                     off the value (ADR shop-admin_money-sign-convention D4). --}}
+                @if ($element['code'] == 'discount')
+                    <tr><td class="py-1 text-ink-500">{{ $element['title'] }}</td><td class="py-1 text-end">{{ ((float) $element['value'] != 0 ? '-' : '') }}{{ gp247_currency_format($element['value']) }}</td></tr>
+                @endif
+                @if ($element['code'] == 'total')
+                    <tr class="font-bold"><td class="py-2 border-t border-ink-100">{{ $element['title'] }}</td><td class="py-2 text-end border-t border-ink-100">{{ gp247_currency_format($element['value']) }}</td></tr>
+                @endif
+            @endforeach
+            {{-- Received is a payment held on the order itself, no longer a totals row (D3);
+                 read it from $order so it shows on new and legacy orders alike. --}}
+            @if ((float) $order->received != 0)
+                <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.totals.received') }}</td><td class="py-1 text-end">{{ gp247_currency_format($order->received) }}</td></tr>
+            @endif
+            <tr><td class="py-1 text-ink-500">{{ gp247_language_render('order.totals.balance') }}</td><td class="py-1 text-end">{{ gp247_currency_format($order->balance) }}</td></tr>
+        </table>
+    </div>
+
+    {{--
+        Storefront extension point (ADR front_storefront-plugin-hooks): plugins
+        such as MultiVendor (dispute box) render under the order without any site
+        editing this template. Nothing registered => empty string.
+    --}}
+    {!! gp247_render_plugin_hook('shop_order_detail_bottom', ['order' => $order]) !!}
+    {{--// Storefront extension point --}}
+@endif
+@endsection
