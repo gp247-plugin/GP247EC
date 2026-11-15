@@ -34,7 +34,7 @@
                         <a href="{{ $product->getUrl() }}" class="block relative aspect-square overflow-hidden bg-ink-50 rounded-lg mb-3">
                             <img src="{{ gp247_file($product->getImage()) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                         </a>
-                        <a href="{{ $product->getUrl() }}" class="text-sm font-medium text-ink-800 clamp-2 hover:text-brand-600">{{ $product->name }}</a>
+                        <a href="{{ $product->getUrl() }}" class="text-sm font-medium text-ink-800 clamp-2 hover:text-brand-550">{{ $product->name }}</a>
                         <p class="text-xs text-ink-400 mt-0.5 mb-2">{{ gp247_language_render('product.sku') }}: {{ $product->sku }}</p>
                         {!! $product->showPrice() !!}
                         <div class="divider my-3"></div>

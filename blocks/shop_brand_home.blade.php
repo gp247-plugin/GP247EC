@@ -19,7 +19,7 @@
                     <span class="flex h-14 w-full items-center justify-center">
                         <img src="{{ gp247_file($ecBrand->getThumb()) }}" alt="{{ $ecBrand->name }}" class="max-h-full max-w-[120px] object-contain grayscale group-hover:grayscale-0 transition" loading="lazy">
                     </span>
-                    <span class="text-xs font-semibold text-ink-700 group-hover:text-brand-800 clamp-1">{{ $ecBrand->name }}</span>
+                    <span class="text-xs font-semibold text-ink-700 group-hover:text-brand-700 clamp-1">{{ $ecBrand->name }}</span>
                 </a>
             @endforeach
         </div>

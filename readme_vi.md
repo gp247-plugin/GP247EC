@@ -1,3 +1,5 @@
+<img src="public/images/logo.png" alt="Logo GP247-EC" width="96" align="right">
+
 # GP247-EC — Template bán hàng (Tailwind)
 
 [English](readme.md) · **Tiếng Việt** · [日本語](readme_ja.md)
@@ -10,12 +12,20 @@ Khác với `GP247Front` (view nằm rải ở hai package `gp247/front` và `gp
 tập trung trong một thư mục**: layout, trang front, trang shop, tài khoản khách, đăng nhập/đăng ký, giỏ hàng,
 thanh toán (Livewire), email, component, CSS/JS nguồn và bản đã build.
 
+![Trang chủ GP247-EC](screenshots/home.jpg)
+
 | Mục | Giá trị |
 |---|---|
 | Khoá (thư mục, `configKey`) | `GP247EC` |
 | Tên hiển thị | GP247-EC - Ecommerce (Tailwind) |
 | Yêu cầu | `gp247/core` 3.13+, `gp247/front`, `gp247/shop` |
 | Giấy phép | Miễn phí |
+
+## Ảnh demo
+
+| Danh sách sản phẩm (bộ lọc bên trái) | Chi tiết sản phẩm | Điện thoại |
+|---|---|---|
+| ![Danh sách sản phẩm (bộ lọc bên trái)](screenshots/listing.jpg) | ![Chi tiết sản phẩm](screenshots/product.jpg) | ![Điện thoại](screenshots/mobile.jpg) |
 
 ## Cài đặt và kích hoạt
 
@@ -37,13 +47,24 @@ Trang chủ được ghép từ các layout block (admin → Layout block). Khi 
 | `banner_image` | top | Banner trượt 2/3 + 2 ô quảng cáo |
 | `welcome` | bottom | Dải chào mừng |
 | `shop_category_home` | bottom | Danh mục dạng icon |
-| `shop_product_promotion` | bottom | Kệ khuyến mãi, đếm ngược tới ngày kết thúc khuyến mãi gần nhất |
+| `shop_product_promotion` | bottom | Kệ sản phẩm đang khuyến mãi |
 | `shop_product_home` | bottom | Sản phẩm mới, lưới 6 cột |
 | `shop_category_tabs` | bottom | Gợi ý theo danh mục (tab) |
 | `shop_brand_home` | bottom | Thương hiệu nổi bật |
 | `email_subscribe` | bottom | Đăng ký nhận tin |
 
 Có thể tắt, đổi thứ tự (sort lớn đứng trên) hoặc xoá từng block trong admin.
+
+**Banner đầu trang** (admin → **Banner**):
+
+| Vùng | Lấy từ | Ghi chú |
+|---|---|---|
+| Banner trượt bên trái | Các banner loại **Banner** | Ảnh hoặc HTML, có link thì bấm được |
+| Ô phải phía trên | Banner **thứ nhất** loại **Banner store** | Thứ tự theo trường Sort, nhỏ trước |
+| Ô phải phía dưới | Banner **thứ hai** loại **Banner store** | Chưa có thì hiện ô "Hot deals" mặc định, dẫn tới tất cả sản phẩm |
+
+Mỗi ô bên phải: ảnh phủ kín ô, nội dung HTML (nếu có) hiện đè lên trên; banner chỉ có HTML thì nền là dải cam.
+Có link thì cả ô bấm được (có đếm lượt bấm). Hai ô bên phải chỉ hiện trên màn hình rộng.
 
 ## Cấu trúc thư mục
 
@@ -58,6 +79,7 @@ GP247EC/
 ├── email/                         # Email liên hệ, đơn hàng, tài khoản
 ├── resources/assets/              # Nguồn CSS / JS / tailwind.config.js
 ├── public/                        # Bản build (css/app.css, js/app.js), ảnh
+├── screenshots/                   # Ảnh demo dùng trong README
 └── AppConfig.php, Provider.php, Route.php, function.php, config.php, gp247.json, Lang/
 ```
 

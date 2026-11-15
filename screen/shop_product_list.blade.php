@@ -16,7 +16,7 @@
             <div class="shelf-head"><h2 class="section-title">{{ gp247_language_render('front.sub_categories') }}</h2></div>
             <div class="flex gap-px overflow-x-auto no-scrollbar bg-ink-100">
                 @foreach ($subCategory as $item)
-                <a href="{{ $item->getUrl() }}" class="group flex w-28 shrink-0 flex-col items-center gap-2 bg-white px-2 py-4 text-center hover:text-brand-700">
+                <a href="{{ $item->getUrl() }}" class="group flex w-28 shrink-0 flex-col items-center gap-2 bg-white px-2 py-4 text-center hover:text-brand-600">
                     <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ink-100 group-hover:bg-brand-100">
                         <img src="{{ gp247_file($item->getThumb()) }}" alt="{{ $item->name }}" class="h-9 w-9 object-contain" loading="lazy">
                     </span>

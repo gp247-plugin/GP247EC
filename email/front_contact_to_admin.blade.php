@@ -16,5 +16,5 @@
     @endif
     <tr><td style="color:#71717a;">{{ $labels['title'] }}</td><td>{{ $contact['title'] }}</td></tr>
 </table>
-<div style="margin-top:16px;padding:12px;background-color:#fff7ed;border-left:4px solid #f97316;">{!! nl2br(e($contact['content'])) !!}</div>
+<div style="margin-top:16px;padding:12px;background-color:#fff8f1;border-left:4px solid #fb8a3c;">{!! nl2br(e($contact['content'])) !!}</div>
 @endsection

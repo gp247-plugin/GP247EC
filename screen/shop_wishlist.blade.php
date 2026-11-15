@@ -35,7 +35,7 @@
                     </a>
 
                     <div class="p-3">
-                        <a href="{{ $product->getUrl() }}" class="text-sm font-medium text-ink-800 clamp-2 hover:text-brand-600">{{ $product->name }}</a>
+                        <a href="{{ $product->getUrl() }}" class="text-sm font-medium text-ink-800 clamp-2 hover:text-brand-550">{{ $product->name }}</a>
                         <p class="text-xs text-ink-400 mt-0.5">{{ gp247_language_render('product.sku') }}: {{ $product->sku }}</p>
                         @if ($item->options)
                             <p class="text-xs text-ink-400">

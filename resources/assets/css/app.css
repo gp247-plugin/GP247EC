@@ -27,18 +27,18 @@
 
   /* Buttons — square-ish, bold, bronze primary / black secondary. */
   .btn { @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2.5 text-sm font-semibold transition select-none disabled:opacity-60 disabled:cursor-not-allowed; }
-  .btn-primary { @apply btn bg-brand-500 text-white hover:bg-brand-600 active:bg-brand-700; }
+  .btn-primary { @apply btn bg-brand-550 text-white hover:bg-brand-600 active:bg-brand-700; }
   .btn-secondary { @apply btn bg-ink-900 text-white hover:bg-ink-800; }
-  .btn-outline { @apply btn border border-ink-300 bg-white text-ink-800 hover:border-brand-500 hover:text-brand-700; }
+  .btn-outline { @apply btn border border-ink-300 bg-white text-ink-800 hover:border-brand-500 hover:text-brand-600; }
   .btn-ghost { @apply btn text-ink-700 hover:bg-ink-100; }
   .btn-sm { @apply text-xs px-3 py-1.5; }
   .btn-lg { @apply text-base px-6 py-3; }
   .btn-icon { @apply btn h-10 w-10 p-0 rounded-full; }
   .btn-buy { @apply btn bg-accent-600 text-white hover:bg-accent-700; }
 
-  .chip { @apply inline-flex items-center gap-1 rounded-sm border border-ink-200 bg-white px-3 py-1 text-xs font-medium text-ink-700 hover:border-brand-500 hover:text-brand-700 transition; }
+  .chip { @apply inline-flex items-center gap-1 rounded-sm border border-ink-200 bg-white px-3 py-1 text-xs font-medium text-ink-700 hover:border-brand-500 hover:text-brand-600 transition; }
   .badge { @apply inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 text-[11px] font-bold leading-tight; }
-  .badge-brand { @apply badge bg-brand-100 text-brand-800; }
+  .badge-brand { @apply badge bg-brand-100 text-brand-700; }
   .badge-accent { @apply badge bg-accent-50 text-accent-700; }
   .badge-sale { @apply badge bg-accent-600 text-white; }
   .badge-warn { @apply badge bg-amber-100 text-amber-800; }
@@ -50,7 +50,7 @@
   .card { @apply bg-white rounded border border-ink-200/70; }
   .card-hover { @apply transition hover:shadow-lift hover:border-brand-400; }
   .panel-head { @apply flex items-center justify-between gap-3 border-b border-ink-100 px-4 py-3; }
-  .panel-title { @apply text-sm font-extrabold uppercase tracking-wide text-brand-700; }
+  .panel-title { @apply text-sm font-extrabold uppercase tracking-wide text-brand-600; }
 
   .product-card { @apply relative flex flex-col overflow-hidden rounded bg-white border border-transparent transition hover:border-brand-500 hover:shadow-lift hover:-translate-y-px; }
   /* WHY plain :hover and not group-hover: inside @apply, group-hover compiles to
@@ -68,10 +68,10 @@
   .input-error { @apply border-accent-500 focus:border-accent-600 focus:ring-accent-500; }
   .label { @apply block text-sm font-semibold text-ink-800 mb-1.5; }
 
-  .nav-link { @apply text-sm font-medium text-white/90 hover:text-white transition; }
+  .nav-link { @apply text-sm font-medium text-ink-700 hover:text-brand-600 transition; }
   .catbar-link { @apply shrink-0 whitespace-nowrap px-3 py-2.5 text-[13px] font-medium text-white/90 hover:bg-white/10 hover:text-white transition; }
-  .sidebar-link { @apply flex items-center gap-3 border-s-2 border-transparent px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50 hover:text-brand-800 transition; }
-  .sidebar-link.active { @apply border-brand-500 bg-brand-50 text-brand-800 font-semibold; }
+  .sidebar-link { @apply flex items-center gap-3 border-s-2 border-transparent px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50 hover:text-brand-700 transition; }
+  .sidebar-link.active { @apply border-brand-500 bg-brand-50 text-brand-700 font-semibold; }
   .divider { @apply border-t border-ink-200; }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -92,8 +92,8 @@
   .price-old { @apply text-ink-400 line-through text-xs; }
 
   /* Section header: black bar with a bronze marker, like a marketplace shelf. */
-  .section-title { @apply flex items-center gap-2 text-base sm:text-xl font-extrabold uppercase tracking-wide text-brand-700 before:block before:h-6 before:w-1.5 before:rounded-sm before:bg-brand-500 before:content-['']; }
-  .section-eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-brand-600; }
+  .section-title { @apply flex items-center gap-2 text-base sm:text-xl font-extrabold uppercase tracking-wide text-brand-600 before:block before:h-6 before:w-1.5 before:rounded-sm before:bg-brand-500 before:content-['']; }
+  .section-eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-brand-550; }
   .shelf { @apply bg-white rounded border border-ink-200/70; }
   .shelf-head { @apply flex items-center justify-between gap-3 border-b-2 border-brand-500 bg-gradient-to-r from-brand-50 to-white px-3 sm:px-4 py-3; }
   .ec-bar { @apply border-b-2 border-brand-500 bg-gradient-to-r from-brand-50 to-white; }

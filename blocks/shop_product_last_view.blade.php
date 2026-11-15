@@ -29,7 +29,7 @@
             <a href="{{ $productLastView->getUrl() }}" class="flex gap-3 px-3 py-2.5 group hover:bg-brand-50">
                 <img src="{{ gp247_file($productLastView->getThumb()) }}" alt="{{ $productLastView->name }}" class="w-14 h-14 rounded-sm border border-ink-100 object-contain shrink-0 bg-white" loading="lazy">
                 <div class="min-w-0">
-                    <p class="text-[13px] text-ink-800 clamp-2 group-hover:text-brand-700">{{ $productLastView->name }}</p>
+                    <p class="text-[13px] text-ink-800 clamp-2 group-hover:text-brand-600">{{ $productLastView->name }}</p>
                     <time datetime="{{ gp247_datetime_to_date($productLastView['timelastview'], 'Y-m-d H:i:s') }}" class="text-[11px] text-ink-400">
                         {{ gp247_datetime_to_date($productLastView['timelastview'], 'Y-m-d H:i:s') }}
                     </time>

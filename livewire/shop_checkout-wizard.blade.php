@@ -27,7 +27,7 @@
             $done = $ecStepIndex !== false && $i < $ecStepIndex;
         @endphp
         <li class="flex items-center gap-2 {{ $loop->last ? '' : 'flex-1' }}">
-            <span class="step-dot {{ $active ? 'border-brand-500 bg-brand-500 text-white' : ($done ? 'border-brand-300 bg-brand-100 text-brand-700' : 'border-ink-300 bg-white text-ink-400') }}">
+            <span class="step-dot {{ $active ? 'border-brand-500 bg-brand-500 text-white' : ($done ? 'border-brand-300 bg-brand-100 text-brand-600' : 'border-ink-300 bg-white text-ink-400') }}">
                 @if ($done)
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
                 @else
@@ -211,7 +211,7 @@
                     type="radio"
                     name="shippingMethodChoice"
                     id="sm_{{ $key }}"
-                    class="accent-brand-600"
+                    class="accent-brand-550"
                     wire:click="selectShipping('{{ e($key) }}')"
                     data-testid="checkout-shipping-rate-{{ $key }}"
                     @checked($shippingMethod === $key)
@@ -256,7 +256,7 @@
                     type="radio"
                     name="paymentMethodChoice"
                     id="pm_{{ $key }}"
-                    class="accent-brand-600"
+                    class="accent-brand-550"
                     wire:click="selectPayment('{{ e($key) }}')"
                     @checked($paymentMethod === $key)
                 >
@@ -286,7 +286,7 @@
         <h2 class="rounded border border-brand-200 border-b-2 border-b-brand-500 bg-gradient-to-r from-brand-50 to-white px-5 py-3 text-sm font-bold uppercase tracking-wide text-ink-900">{{ gp247_language_render('checkout.page_title') }}</h2>
 
         <div class="card p-5">
-            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-700">{{ gp247_language_render('cart.checkout') }}</h3>
+            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-600">{{ gp247_language_render('cart.checkout') }}</h3>
             <p class="text-sm text-ink-700 leading-relaxed">
                 {{ $first_name }} {{ $last_name }}<br>
                 {{ $city ? $city.', ' : '' }}{{ $district ? $district.', ' : '' }}{{ ($ward ?? '') ? $ward.', ' : '' }}{{ $address1 }}{{ $address2 ? ', '.$address2 : '' }}{{ $address3 ? ', '.$address3 : '' }}<br>
@@ -297,7 +297,7 @@
 
         @if ($paymentMethod !== '' && isset($paymentPlugins[$paymentMethod]))
         <div class="card p-5" data-testid="checkout-confirm-payment">
-            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-700">{{ gp247_language_render('cart.payment_method') }}</h3>
+            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-600">{{ gp247_language_render('cart.payment_method') }}</h3>
             <p class="text-sm font-medium text-ink-700">{{ $paymentPlugins[$paymentMethod]['title'] ?? $paymentMethod }}</p>
             @if (is_string($paymentPlugins[$paymentMethod]['note'] ?? null) && trim($paymentPlugins[$paymentMethod]['note']) !== '')
             <p class="mt-2 text-sm text-ink-700 leading-relaxed" data-testid="checkout-confirm-payment-note">{{ trim($paymentPlugins[$paymentMethod]['note']) }}</p>
@@ -315,7 +315,7 @@
              attribute value, keeping Σ(line) == subtotal
 . --}}
         <div class="card p-5">
-            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-700">{{ gp247_language_render('cart.cart_title') }}</h3>
+            <h3 class="mb-3 border-b border-ink-100 pb-2 text-xs font-bold uppercase tracking-wide text-brand-600">{{ gp247_language_render('cart.cart_title') }}</h3>
             <table class="w-full text-sm">
                 <thead>
                     <tr class="text-start text-[11px] uppercase tracking-wide text-ink-500 bg-ink-100">

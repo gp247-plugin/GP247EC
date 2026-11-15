@@ -40,7 +40,7 @@
                     <div class="card overflow-hidden" data-testid="storefront-cart-store">
                         <div class="flex items-center justify-between gap-3 border-b border-ink-100 px-4 py-3">
                             <span class="flex items-center gap-2 text-sm font-bold text-ink-900">
-                                <span class="flex h-7 w-7 items-center justify-center rounded-sm bg-brand-100 text-brand-700">
+                                <span class="flex h-7 w-7 items-center justify-center rounded-sm bg-brand-100 text-brand-600">
                                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1.5-5h15L21 9M3 9v10a1 1 0 001 1h16a1 1 0 001-1V9M3 9h18M9 13h6"/></svg>
                                 </span>
                                 {{ gp247_store_info(key: 'name', storeId: $storeId) }}
@@ -63,7 +63,7 @@
                                             <img src="{{ gp247_file($row['process_product_image']) }}" alt="{{ $row['process_product_name'] }}" class="h-20 w-20 rounded-sm border border-ink-100 bg-white object-contain">
                                         </a>
                                         <div class="min-w-0">
-                                            <a href="{{ $row['process_product_url'] }}" class="clamp-2 text-sm text-ink-900 hover:text-brand-700">{{ $row['process_product_name'] }}</a>
+                                            <a href="{{ $row['process_product_url'] }}" class="clamp-2 text-sm text-ink-900 hover:text-brand-600">{{ $row['process_product_name'] }}</a>
                                             <p class="mt-1 text-xs text-ink-500">
                                                 {{ gp247_language_render('product.sku') }}: <span class="text-ink-700">{{ $row['process_product_sku'] }}</span>
                                                 {!! $row['process_product_display_vendor'] !!}
@@ -141,7 +141,7 @@
                         <span class="text-sm text-ink-600">{{ gp247_language_quickly('cart.total', 'Total') }}</span>
                         <span class="price text-xl">{{ gp247_currency_render(collect($itemsByStore)->flatMap(fn ($storeItems) => gp247_cart_process_data($storeItems))->sum('process_product_price_subtotal')) }}</span>
                     </div>
-                    <p class="mt-3 rounded-sm bg-brand-50 px-3 py-2 text-xs text-brand-800">{{ gp247_language_quickly('cart.checkout_per_vendor_hint', 'Each vendor is checked out separately.') }}</p>
+                    <p class="mt-3 rounded-sm bg-brand-50 px-3 py-2 text-xs text-brand-700">{{ gp247_language_quickly('cart.checkout_per_vendor_hint', 'Each vendor is checked out separately.') }}</p>
                     <a href="{{ gp247_route_front('product.all') }}" class="btn-outline btn-sm mt-4 w-full">{{ trans('Templates/GP247EC::lang.ec.continue_shopping') }}</a>
                     <p class="mt-4 flex items-center justify-center gap-1.5 text-[11px] text-ink-500">
                         <svg class="w-3.5 h-3.5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>

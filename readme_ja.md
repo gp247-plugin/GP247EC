@@ -1,3 +1,5 @@
+<img src="public/images/logo.png" alt="GP247-EC ロゴ" width="96" align="right">
+
 # GP247-EC — EC ストアフロントテンプレート (Tailwind)
 
 [English](readme.md) · [Tiếng Việt](readme_vi.md) · **日本語**
@@ -10,12 +12,20 @@ GP247-EC は GP247 / S-Cart 向けの**無料**ストアフロントテンプレ
 1 つのフォルダにまとまっています**：レイアウト、フロントページ、ショップページ、会員エリア、ログイン／登録、カート、
 チェックアウト（Livewire）、メール、コンポーネント、CSS/JS のソースとビルド済みファイル。
 
+![GP247-EC トップページ](screenshots/home.jpg)
+
 | 項目 | 値 |
 |---|---|
 | キー（フォルダ、`configKey`） | `GP247EC` |
 | 表示名 | GP247-EC - Ecommerce (Tailwind) |
 | 必要条件 | `gp247/core` 3.13 以上、`gp247/front`、`gp247/shop` |
 | ライセンス | 無料 |
+
+## スクリーンショット
+
+| 商品一覧（左側の絞り込み） | 商品詳細 | スマートフォン |
+|---|---|---|
+| ![商品一覧（左側の絞り込み）](screenshots/listing.jpg) | ![商品詳細](screenshots/product.jpg) | ![スマートフォン](screenshots/mobile.jpg) |
 
 ## インストールと有効化
 
@@ -37,13 +47,24 @@ php artisan optimize:clear
 | `banner_image` | top | 2/3 幅のスライダー + プロモーション枠 2 つ |
 | `welcome` | bottom | ウェルカムバー |
 | `shop_category_home` | bottom | カテゴリーアイコン |
-| `shop_product_promotion` | bottom | セール棚（最も近いセール終了日までのカウントダウン付き） |
+| `shop_product_promotion` | bottom | セール中の商品棚 |
 | `shop_product_home` | bottom | 新着商品（6 列） |
 | `shop_category_tabs` | bottom | カテゴリー別おすすめ（タブ） |
 | `shop_brand_home` | bottom | 注目ブランド |
 | `email_subscribe` | bottom | メールマガジン登録 |
 
 各ブロックは管理画面で無効化・並べ替え（sort が大きいほど上）・削除できます。
+
+**トップのバナー**（管理画面 → **Banner**）：
+
+| 場所 | 取得元 | 補足 |
+|---|---|---|
+| 左のスライダー | 種類 **Banner** のバナー | 画像または HTML。URL があればクリック可能 |
+| 右上の枠 | 種類 **Banner store** の **1 件目** | Sort の小さい順 |
+| 右下の枠 | 種類 **Banner store** の **2 件目** | ない場合は既定の「Hot deals」枠（全商品へのリンク） |
+
+右側の各枠では画像が枠いっぱいに表示され、HTML があればその上に重ねて表示されます。HTML だけのバナーはオレンジの
+グラデーション背景になります。URL を設定すると枠全体がリンク（クリック数を計測）になります。右側の枠は広い画面でのみ表示されます。
 
 ## フォルダ構成
 
@@ -58,6 +79,7 @@ GP247EC/
 ├── email/                         # お問い合わせ・注文・アカウントのメール
 ├── resources/assets/              # CSS / JS ソース + tailwind.config.js
 ├── public/                        # ビルド済み（css/app.css, js/app.js）、画像
+├── screenshots/                   # README 用のデモ画像
 └── AppConfig.php, Provider.php, Route.php, function.php, config.php, gp247.json, Lang/
 ```
 

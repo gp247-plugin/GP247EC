@@ -290,16 +290,46 @@ class AppConfig extends ExtensionConfigDefault
                     $dataInsert[] = $ecRow;
                 }
 
-                // WHY: the "Product last view" left block is already seeded by
-                // gp247/shop (DataShopDefaultSeeder) for shop_product_detail,
-                // shop_product_list and shop_search. Inserting it again here
-                // duplicated the block on the product-list/category page (both
-                // rows match layout_page=shop_product_list). Rely on the shop
-                // seeder as the single source instead.
+                // WHY GP247-EC seeds the shop's "last viewed" block itself: gp247/shop
+                // seeds it only for the template active when the shop is installed, and
+                // switching template runs the outgoing template's removeStore(), which
+                // deletes it. One row covers listing + search (layout_page list).
+                $dataInsert[] = $this->ecBlockRow($storeId, 'Product last view', 'left', 'shop_product_list,shop_search', 'shop_product_last_view', 20);
             }
 
-            FrontLayoutBlock::insert($dataInsert);
-        
+            // Blocks owned by plugins (gp247-config.front.layout_block_views). A plugin
+            // places its block for the template active at plugin install; a template
+            // switch deletes that placement, so place it again — only for plugins
+            // registered right now, by block name, never importing a plugin class.
+            $registered = (array) config('gp247-config.front.layout_block_views', []);
+            foreach ([
+                'product_flash_sale' => ['Flash sale', 'bottom', 'front_home', 18],
+                'vendor_new'         => ['Top new vendors', 'bottom', 'front_home', 4],
+            ] as $view => [$name, $position, $page, $sort]) {
+                if (array_key_exists($view, $registered)) {
+                    $dataInsert[] = $this->ecBlockRow($storeId, $name, $position, $page, $view, $sort);
+                }
+            }
+
+            // WHY: setupStore() can run again for the same store (template re-assigned,
+            // or a store created while GP247-EC is active) — never duplicate a block.
+            $existing = FrontLayoutBlock::where('store_id', $storeId)
+                ->where('template', $this->configKey)
+                ->pluck('text')
+                ->all();
+            $dataInsert = array_values(array_filter($dataInsert, fn ($row) => !in_array($row['text'], $existing, true)));
+            if ($dataInsert) {
+                FrontLayoutBlock::insert($dataInsert);
+            }
+
+            // Sample banners once per store (same re-run guard as the blocks above).
+            $hasBanners = FrontBanner::where('store_id', $storeId)
+                ->where('name', 'like', '%('.$this->configKey.')%')
+                ->exists();
+            if ($hasBanners) {
+                return null;
+            }
+
             // WHY: 1-1 ownership — each banner carries its own store_id column, so
             // the owning store is set on the banner row itself (no pivot insert).
             $modelBanner = new FrontBanner;
@@ -312,14 +342,41 @@ class AppConfig extends ExtensionConfigDefault
             return null;
         }
     }
+
+    /**
+     * One layout-block row owned by this template for a store.
+     *
+     * @param string $storeId  Store the row belongs to.
+     * @param string $name     Block name (the template key is appended).
+     * @param string $position Layout position (top, left, bottom…).
+     * @param string $page     Layout page(s), comma separated.
+     * @param string $view     Block view name (blocks/<view> or a plugin block).
+     * @param int    $sort     Higher shows first within the position.
+     * @return array<string, mixed>
+     */
+    private function ecBlockRow($storeId, string $name, string $position, string $page, string $view, int $sort): array
+    {
+        return [
+            'id'       => $this->uuid(),
+            'name'     => $name.' ('.$this->configKey.')',
+            'position' => $position,
+            'page'     => $page,
+            'text'     => $view,
+            'type'     => 'view',
+            'sort'     => $sort,
+            'status'   => 1,
+            'template' => $this->configKey,
+            'store_id' => $storeId,
+        ];
+    }
+
     /**
      * Home-page layout blocks GP247-EC adds on top of the default set:
      * the "top picks by category" tabs and the brand shelf (bottom position,
      * below the newest products, above the newsletter band).
      *
      * @param string $storeId Store the rows belong to.
-     * @return array<int, array<string, mixed>> Rows for FrontLayoutBlock::insert.
-     *
+     * @return array<int, array<string, mixed>> Rows for FrontLayoutBlock::insert().
      */
     private function ecExtraHomeBlocks($storeId): array
     {

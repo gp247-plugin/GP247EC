@@ -1,7 +1,7 @@
 {{-- GP247-EC detail price: big crimson final price, struck original and a crimson "-x%" tag on a tinted strip (the strip is drawn by screen/shop_product_detail). --}}
 @switch($kind)
     @case(GP247_PRODUCT_GROUP)
-        <span class="text-2xl font-bold text-brand-700">{!! gp247_language_render('product.price_group') !!}</span>
+        <span class="text-2xl font-bold text-brand-600">{!! gp247_language_render('product.price_group') !!}</span>
         @break
     @default
         @if ($price == $priceFinal)

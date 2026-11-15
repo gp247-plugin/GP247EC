@@ -16,7 +16,7 @@
                         <tbody>
                             <tr>
                             <td style="box-sizing:border-box">
-                                <a href="{{ $reset_link }}" class="button button-primary" style="box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#f97316;border-top:10px solid #f97316;border-right:18px solid #f97316;border-bottom:10px solid #f97316;border-left:18px solid #f97316" target="_blank">{{ $reset_button }}</a>
+                                <a href="{{ $reset_link }}" class="button button-primary" style="box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#fb8a3c;border-top:10px solid #fb8a3c;border-right:18px solid #fb8a3c;border-bottom:10px solid #fb8a3c;border-left:18px solid #fb8a3c" target="_blank">{{ $reset_button }}</a>
                             </td>
                             </tr>
                         </tbody>

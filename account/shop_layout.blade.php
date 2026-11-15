@@ -19,7 +19,7 @@
                 {{ mb_substr((string) ($ecCustomer->first_name ?? '?'), 0, 1) }}
             </span>
             <span class="min-w-0 leading-tight">
-                <span class="block text-[11px] uppercase tracking-wide text-brand-700">{{ trans('Templates/GP247EC::lang.ec.customer_center') }}</span>
+                <span class="block text-[11px] uppercase tracking-wide text-brand-600">{{ trans('Templates/GP247EC::lang.ec.customer_center') }}</span>
                 <span class="block truncate text-sm font-semibold">{{ trim(($ecCustomer->first_name ?? '').' '.($ecCustomer->last_name ?? '')) }}</span>
             </span>
         </div>

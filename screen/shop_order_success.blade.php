@@ -15,7 +15,7 @@
             <p class="mt-2 text-sm text-ink-600">{{ gp247_language_render('checkout.order_success_msg') }}</p>
         </div>
         <div class="px-6 py-8">
-            <p class="inline-block rounded-sm border border-dashed border-brand-400 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-800">{{ gp247_language_render('checkout.order_success_order_info', ['order_id' => session('orderID')]) }}</p>
+            <p class="inline-block rounded-sm border border-dashed border-brand-400 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700">{{ gp247_language_render('checkout.order_success_order_info', ['order_id' => session('orderID')]) }}</p>
             <div class="mt-6 flex flex-col sm:flex-row justify-center gap-3">
                 <a href="{{ gp247_route_front('front.home') }}" class="btn-primary">{{ gp247_language_quickly('action.continue_shopping', 'Continue shopping') }}</a>
                 @if (function_exists('customer') && customer()->user())

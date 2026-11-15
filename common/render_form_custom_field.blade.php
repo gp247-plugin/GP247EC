@@ -69,7 +69,7 @@
                             <label for="{{ $keyField }}__{{ $loop->index }}" class="flex items-center gap-1.5 text-sm text-ink-600 cursor-pointer whitespace-nowrap">
                                 <input id="{{ $keyField }}__{{ $loop->index }}" type="radio" name="{{ $inputName }}"
                                     value="{!! gp247_form_render_escape($optKey) !!}" @checked($currentScalar == $optKey)
-                                    class="border-ink-300 accent-brand-600">
+                                    class="border-ink-300 accent-brand-550">
                                 {!! gp247_form_render_escape($optLabel) !!}
                             </label>
                         @endforeach
@@ -82,7 +82,7 @@
                             <label for="{{ $keyField }}__{{ $loop->index }}" class="flex items-center gap-1.5 text-sm text-ink-600 cursor-pointer whitespace-nowrap">
                                 <input id="{{ $keyField }}__{{ $loop->index }}" type="checkbox" name="{{ $inputName }}"
                                     value="{!! gp247_form_render_escape($optKey) !!}" @checked(in_array((string) $optKey, $checkedValues))
-                                    class="rounded border-ink-300 accent-brand-600">
+                                    class="rounded border-ink-300 accent-brand-550">
                                 {!! gp247_form_render_escape($optLabel) !!}
                             </label>
                         @endforeach

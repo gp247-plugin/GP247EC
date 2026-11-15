@@ -29,7 +29,7 @@
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-100 text-ink-700 group-hover:bg-brand-500 group-hover:text-white transition">
                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">{!! $ecIcon !!}</svg>
             </span>
-            <span class="text-sm font-semibold text-ink-800 group-hover:text-brand-800">{{ gp247_language_render($ecLabel) }}</span>
+            <span class="text-sm font-semibold text-ink-800 group-hover:text-brand-700">{{ gp247_language_render($ecLabel) }}</span>
         </a>
     @endforeach
 </div>

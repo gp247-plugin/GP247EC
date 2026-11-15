@@ -9,21 +9,21 @@ document.addEventListener('alpine:init', () => {
     /**
      * Sticky header state: `scrolled` (adds a shadow) and the mobile menu drawer.
      */
-    Alpine.data('gp247ecHeader', () => ({
+    const header = () => ({
         scrolled: false,
         mobileMenuOpen: false,
         init() {
             this.scrolled = window.scrollY > 80;
             window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 80; }, { passive: true });
         },
-    }));
+    });
 
     /**
      * Home hero banner slider (blocks/banner_image.blade.php): autoplay, dot
      * navigation and mouse / touch drag-to-swipe. `isRtl` comes from the server
      * (gp247ec_is_rtl()) because RTL follows the admin language setting.
      */
-    Alpine.data('gp247ecBannerSlider', (count = 1, isRtl = false) => ({
+    const bannerSlider = (count = 1, isRtl = false) => ({
         count,
         index: 0,
         dirSign: isRtl ? -1 : 1,
@@ -105,14 +105,16 @@ document.addEventListener('alpine:init', () => {
                 event.preventDefault();
             }
         },
-    }));
+    });
 
     /**
      * Countdown to a server-computed target (epoch ms): exposes d (days) and
-     * padded h / m / s, so a block renders a real deadline — the deals shelf
-     * counts down to the nearest end date of the promotions it shows.
+     * padded h / m / s, so a block renders a real deadline. gp247ecCountdown
+     * splits days off (d + h 0-23); gp247frontCountdown keeps h = total hours.
      */
-    Alpine.data('gp247ecCountdown', (targetMs) => ({
+    // splitDays: GP247-EC shows d + h(0-23); the GP247Front name keeps its
+    // original contract (h = total hours) for plugin views written against it.
+    const countdown = (splitDays) => (targetMs) => ({
         targetMs,
         d: 0,
         h: '00',
@@ -130,8 +132,8 @@ document.addEventListener('alpine:init', () => {
         tick() {
             const remainingSeconds = Math.max(0, Math.floor((this.targetMs - Date.now()) / 1000));
             const pad = (n) => String(n).padStart(2, '0');
-            this.d = Math.floor(remainingSeconds / 86400);
-            this.h = pad(Math.floor((remainingSeconds % 86400) / 3600));
+            this.d = splitDays ? Math.floor(remainingSeconds / 86400) : 0;
+            this.h = pad(Math.floor((splitDays ? remainingSeconds % 86400 : remainingSeconds) / 3600));
             this.m = pad(Math.floor((remainingSeconds % 3600) / 60));
             this.s = pad(remainingSeconds % 60);
             if (remainingSeconds <= 0 && this.timer) {
@@ -143,5 +145,14 @@ document.addEventListener('alpine:init', () => {
                 clearInterval(this.timer);
             }
         },
-    }));
+    });
+
+    Alpine.data('gp247ecHeader', header);
+    Alpine.data('gp247ecBannerSlider', bannerSlider);
+    Alpine.data('gp247ecCountdown', countdown(true));
+    // WHY: plugin storefront views rendered inside this layout use the GP247Front
+    // component names (class/JS contract shared by every template).
+    Alpine.data('gp247frontHeader', header);
+    Alpine.data('gp247frontBannerSlider', bannerSlider);
+    Alpine.data('gp247frontCountdown', countdown(false));
 });

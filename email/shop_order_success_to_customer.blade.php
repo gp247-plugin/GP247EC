@@ -1,10 +1,10 @@
 @extends('GP247TemplatePath::GP247EC.email.shop_layout')
 
 @section('main')
-<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background-color:#fff7ed;border-left:4px solid #f97316;">
+<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background-color:#fff8f1;border-left:4px solid #fb8a3c;">
     <tr>
         <td style="padding:16px 18px;font-size:14px;line-height:1.7;color:#3f3f46;">
-            <div style="font-size:16px;font-weight:bold;color:#18181b;margin-bottom:6px;">{{ gp247_language_render('order.id') }}: <span style="color:#c2410c;">{{ $orderID }}</span></div>
+            <div style="font-size:16px;font-weight:bold;color:#18181b;margin-bottom:6px;">{{ gp247_language_render('order.id') }}: <span style="color:#c2560f;">{{ $orderID }}</span></div>
             <div><span style="color:#71717a;">{{ gp247_language_render('order.full_name') }}:</span> {{ $toname }}</div>
             <div><span style="color:#71717a;">{{ gp247_language_render('order.address') }}:</span> {{ $address }}</div>
             <div><span style="color:#71717a;">{{ gp247_language_render('order.phone') }}:</span> {{ $phone }}</div>
@@ -18,7 +18,7 @@
 
 <h3 style="margin:28px 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.5px;color:#18181b;">{{ gp247_language_render('order.order_detail') }}</h3>
 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:13px;">
-    <tr style="background-color:#fff7ed;color:#9a3412;border-bottom:2px solid #f97316;">
+    <tr style="background-color:#fff8f1;color:#9a4410;border-bottom:2px solid #fb8a3c;">
         <td style="padding:8px 10px;font-weight:bold;">{{ gp247_language_render('email.order.sort') }}</td>
         <td style="padding:8px 10px;font-weight:bold;">{{ gp247_language_render('email.order.sku') }}</td>
         <td style="padding:8px 10px;font-weight:bold;">{{ gp247_language_render('email.order.name') }}</td>
@@ -32,7 +32,7 @@
         <td style="padding:10px;color:#71717a;">{{ $item['sku'] }}</td>
         <td style="padding:10px;color:#18181b;">{{ $item['name'] }}
             @if ($item['linkDownload'])
-                <br><a href="{{ $item['linkDownload'] }}" style="color:#c2410c;font-weight:bold;">Download</a>
+                <br><a href="{{ $item['linkDownload'] }}" style="color:#c2560f;font-weight:bold;">Download</a>
             @endif
         </td>
         <td style="padding:10px;" align="right">{{ $item['price'] }}</td>
@@ -56,8 +56,8 @@
         <td style="padding:4px 10px;" align="right">{{ $discount }}</td>
     </tr>
     <tr>
-        <td style="padding:10px;border-top:2px solid #f97316;font-size:16px;font-weight:bold;color:#18181b;" align="right">{{ gp247_language_render('order.total') }}</td>
-        <td style="padding:10px;border-top:2px solid #f97316;font-size:18px;font-weight:bold;color:#be123c;" align="right">{{ $total }}</td>
+        <td style="padding:10px;border-top:2px solid #fb8a3c;font-size:16px;font-weight:bold;color:#18181b;" align="right">{{ gp247_language_render('order.total') }}</td>
+        <td style="padding:10px;border-top:2px solid #fb8a3c;font-size:18px;font-weight:bold;color:#be123c;" align="right">{{ $total }}</td>
     </tr>
 </table>
 @endsection

@@ -2,7 +2,7 @@
     GP247-EC sign-in / sign-up side panel: orange brand panel with the store name,
     a short tagline and the four service promises. Hidden on phones.
 --}}
-<aside class="relative hidden md:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-brand-500 to-brand-700 p-8 text-white">
+<aside class="relative hidden md:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-brand-500 to-brand-600 p-8 text-white">
     <div>
         <a href="{{ gp247_route_front('front.home') }}" class="flex items-center gap-2.5">
             <span class="flex h-10 w-10 items-center justify-center rounded bg-white p-1">

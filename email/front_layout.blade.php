@@ -15,7 +15,7 @@
         <td align="center">
             <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:4px;overflow:hidden;">
                 <tr>
-                    <td style="background-color:#ea580c;border-bottom:3px solid #c2410c;padding:20px 32px;color:#ffffff;font-size:18px;font-weight:bold;">
+                    <td style="background-color:#ea6f1f;border-bottom:3px solid #c2560f;padding:20px 32px;color:#ffffff;font-size:18px;font-weight:bold;">
                         {{ $storeTitle ?? '' }}
                     </td>
                 </tr>
@@ -25,7 +25,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" style="background-color:#fff7ed;padding:14px 32px;color:#9a3412;font-size:12px;">
+                    <td align="center" style="background-color:#fff8f1;padding:14px 32px;color:#9a4410;font-size:12px;">
                         &copy;{{ date('Y') }} {{ $storeTitle ?? '' }}
                     </td>
                 </tr>

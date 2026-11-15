@@ -1,3 +1,5 @@
+<img src="public/images/logo.png" alt="GP247-EC logo" width="96" align="right">
+
 # GP247-EC — Ecommerce storefront template (Tailwind)
 
 **English** · [Tiếng Việt](readme_vi.md) · [日本語](readme_ja.md)
@@ -10,12 +12,20 @@ Unlike `GP247Front` (whose views are spread across the `gp247/front` and `gp247/
 GP247-EC lives in one folder**: layout, front pages, shop pages, customer account, login/register, cart, checkout
 (Livewire), emails, components, CSS/JS sources and the compiled bundle.
 
+![GP247-EC home page](screenshots/home.jpg)
+
 | Item | Value |
 |---|---|
 | Key (folder, `configKey`) | `GP247EC` |
 | Display name | GP247-EC - Ecommerce (Tailwind) |
 | Requires | `gp247/core` 3.13+, `gp247/front`, `gp247/shop` |
 | License | Free |
+
+## Screenshots
+
+| Product listing (filter sidebar) | Product detail | Phone |
+|---|---|---|
+| ![Product listing (filter sidebar)](screenshots/listing.jpg) | ![Product detail](screenshots/product.jpg) | ![Phone](screenshots/mobile.jpg) |
 
 ## Install and activate
 
@@ -37,13 +47,24 @@ The home page is assembled from layout blocks (admin → Layout block). Assignin
 | `banner_image` | top | Two-thirds slider + two promo tiles |
 | `welcome` | bottom | Welcome strip |
 | `shop_category_home` | bottom | Category icons |
-| `shop_product_promotion` | bottom | Deals shelf with a countdown to the nearest promotion end date |
+| `shop_product_promotion` | bottom | Shelf of products on promotion |
 | `shop_product_home` | bottom | Newest products, 6-column grid |
 | `shop_category_tabs` | bottom | Top picks by category (tabs) |
 | `shop_brand_home` | bottom | Featured brands |
 | `email_subscribe` | bottom | Newsletter band |
 
 Each block can be disabled, reordered (higher sort shows first) or deleted in admin.
+
+**Hero banners** (admin → **Banner**):
+
+| Area | Source | Notes |
+|---|---|---|
+| Slider (left) | Banners of type **Banner** | Image or HTML; a URL makes it clickable |
+| Top-right tile | **First** banner of type **Banner store** | Ordered by Sort, smallest first |
+| Bottom-right tile | **Second** banner of type **Banner store** | Without one, the default "Hot deals" tile links to all products |
+
+On each right-hand tile the image fills the tile and the HTML, if any, is drawn on top; an HTML-only banner gets the
+orange gradient. A URL makes the whole tile a tracked link. The right-hand tiles show on wide screens only.
 
 ## Folder structure
 
@@ -58,6 +79,7 @@ GP247EC/
 ├── email/                         # Contact, order and account emails
 ├── resources/assets/              # CSS / JS sources + tailwind.config.js
 ├── public/                        # Compiled bundle (css/app.css, js/app.js), images
+├── screenshots/                   # Demo images used by this README
 └── AppConfig.php, Provider.php, Route.php, function.php, config.php, gp247.json, Lang/
 ```
 

@@ -19,7 +19,7 @@
 <div x-data="gp247ecHeader">
 
     {{-- 1. Top strip --}}
-    <div class="ec-topbar hidden md:block bg-brand-700 text-brand-100 text-xs">
+    <div class="ec-topbar hidden md:block bg-brand-550 text-brand-50 text-xs">
         <div class="container-x flex items-center justify-between h-8">
             <div class="flex items-center gap-4">
                 @if (gp247_store_info(key: 'long_phone', default: null))
@@ -51,7 +51,7 @@
     </div>
 
     {{-- 2 + 3. Sticky header: main bar and category bar --}}
-    <header role="banner" class="sticky top-0 z-30 bg-gradient-to-b from-brand-500 to-brand-600 text-white transition-shadow" :class="scrolled && 'shadow-lift'">
+    <header role="banner" class="sticky top-0 z-30 bg-gradient-to-b from-brand-500 to-brand-550 text-white transition-shadow" :class="scrolled && 'shadow-lift'">
         <div class="container-x flex items-center gap-3 lg:gap-8 h-14 md:h-[72px]">
 
             <button type="button" @click="mobileMenuOpen = true" class="lg:hidden -ms-1 p-2 text-white" aria-label="{{ gp247_language_quickly('front.menu', 'Menu') }}" data-testid="storefront-header-menu">
@@ -69,7 +69,7 @@
                 <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="{{ gp247_language_render('search.placeholder') }}"
                        class="w-full min-w-0 h-11 rounded-s border-2 border-e-0 border-white bg-white px-4 text-sm text-ink-900 placeholder:text-ink-400 outline-none"
                        aria-label="{{ gp247_language_render('search.placeholder') }}" data-testid="storefront-header-search-input" />
-                <button type="submit" class="h-11 shrink-0 rounded-e border-2 border-white bg-brand-700 px-6 text-sm font-bold text-white hover:bg-brand-800 transition flex items-center gap-2" data-testid="storefront-header-search-submit">
+                <button type="submit" class="h-11 shrink-0 rounded-e border-2 border-white bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 transition flex items-center gap-2" data-testid="storefront-header-search-submit">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
                     <span class="hidden lg:inline">{{ gp247_language_quickly('front.search', 'Search') }}</span>
                 </button>
@@ -87,14 +87,14 @@
                         </a>
                         <a href="{{ gp247_route_front('cart.wishlist') }}" class="relative p-2 text-white hover:text-brand-100 transition" aria-label="{{ gp247_language_render('front.wishlist') }}">
                             <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c1.9 0 3.4 1 5.5 3 2.1-2 3.6-3 5.5-3C21 5 23.5 8.5 21.5 12.5 19 16.65 12 21 12 21z"/></svg>
-                            <span class="gp247-wishlist absolute top-0 end-0 min-w-[18px] h-[18px] px-1 rounded-full bg-white text-brand-700 text-[10px] font-bold flex items-center justify-center ring-2 ring-brand-600">{{ gp247_cart()->instance('wishlist')->count() }}</span>
+                            <span class="gp247-wishlist absolute top-0 end-0 min-w-[18px] h-[18px] px-1 rounded-full bg-white text-brand-600 text-[10px] font-bold flex items-center justify-center ring-2 ring-brand-550">{{ gp247_cart()->instance('wishlist')->count() }}</span>
                         </a>
                     @endif
                     @if (gp247_config('link_cart', null, 1))
                         <a href="{{ gp247_route_front('cart') }}" class="relative flex items-center gap-2 p-2 md:rounded md:border md:border-white/50 md:px-3 text-white hover:bg-white/10 transition" aria-label="{{ gp247_language_render('front.cart') }}" data-testid="storefront-header-cart">
                             <span class="relative">
                                 <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.7 12.4a2 2 0 002 1.6h8.6a2 2 0 002-1.6L21 8H6"/></svg>
-                                <span class="gp247-cart absolute -top-2 -end-2 min-w-[18px] h-[18px] px-1 rounded-full bg-white text-accent-600 text-[10px] font-bold flex items-center justify-center ring-2 ring-brand-600">{{ gp247_cart()->instance('default')->count() }}</span>
+                                <span class="gp247-cart absolute -top-2 -end-2 min-w-[18px] h-[18px] px-1 rounded-full bg-white text-accent-600 text-[10px] font-bold flex items-center justify-center ring-2 ring-brand-550">{{ gp247_cart()->instance('default')->count() }}</span>
                             </span>
                             <span class="hidden lg:inline text-sm font-semibold text-white">{{ gp247_language_render('front.cart') }}</span>
                         </a>
@@ -107,17 +107,17 @@
         <form class="md:hidden container-x pb-2.5 flex" action="{{ gp247_route_front('front.search') }}" method="GET" role="search">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="{{ gp247_language_render('search.placeholder') }}"
                    class="w-full min-w-0 h-10 rounded-s bg-white px-3 text-sm text-ink-900 placeholder:text-ink-400 outline-none" aria-label="{{ gp247_language_render('search.placeholder') }}" />
-            <button type="submit" class="h-10 shrink-0 rounded-e bg-brand-700 px-4 text-white" aria-label="{{ gp247_language_quickly('front.search', 'Search') }}">
+            <button type="submit" class="h-10 shrink-0 rounded-e bg-brand-600 px-4 text-white" aria-label="{{ gp247_language_quickly('front.search', 'Search') }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
             </button>
         </form>
 
         {{-- 3. Category bar --}}
-        <div class="hidden lg:block border-t border-white/15 bg-brand-700">
+        <div class="hidden lg:block border-t border-white/25 bg-brand-550">
             <div class="container-x flex items-center gap-1">
                 @if ($ecTopCategories->count())
                     <div class="relative shrink-0" x-data="{ open: false }" @mouseleave="open = false" @keydown.escape.window="open = false" @click.outside="open = false">
-                        <button type="button" @click="open = !open" @mouseenter="open = true" class="flex items-center gap-2 bg-brand-900 px-4 py-2.5 text-[13px] font-bold uppercase tracking-wide text-white hover:bg-brand-800 transition" :aria-expanded="open.toString()" data-testid="storefront-header-categories">
+                        <button type="button" @click="open = !open" @mouseenter="open = true" class="flex items-center gap-2 bg-brand-700 px-4 py-2.5 text-[13px] font-bold uppercase tracking-wide text-white hover:bg-brand-800 transition" :aria-expanded="open.toString()" data-testid="storefront-header-categories">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
                             {{ gp247_language_quickly('front.all_categories', 'All categories') }}
                         </button>
@@ -125,7 +125,7 @@
                             <ul class="w-60 shrink-0 border-e border-ink-100 py-2">
                                 @foreach ($ecTopCategories as $ecCat)
                                     <li>
-                                        <a href="{{ $ecCat->getUrl() }}" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-brand-50 hover:text-brand-800">
+                                        <a href="{{ $ecCat->getUrl() }}" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-brand-50 hover:text-brand-700">
                                             <img src="{{ gp247_file($ecCat->getThumb()) }}" alt="" class="w-6 h-6 object-contain shrink-0">
                                             <span class="clamp-1">{{ $ecCat->name }}</span>
                                         </a>
@@ -137,10 +137,10 @@
                                     @php $ecChildren = $modelCategory->start()->setParent($ecCat->id)->getData(); @endphp
                                     @if ($ecChildren->count())
                                         <div>
-                                            <a href="{{ $ecCat->getUrl() }}" class="block text-xs font-bold uppercase tracking-wide text-ink-900 hover:text-brand-700 mb-2">{{ $ecCat->name }}</a>
+                                            <a href="{{ $ecCat->getUrl() }}" class="block text-xs font-bold uppercase tracking-wide text-ink-900 hover:text-brand-600 mb-2">{{ $ecCat->name }}</a>
                                             <ul class="space-y-1.5">
                                                 @foreach ($ecChildren as $ecChild)
-                                                    <li><a href="{{ $ecChild->getUrl() }}" class="text-sm text-ink-600 hover:text-brand-700">{{ $ecChild->name }}</a></li>
+                                                    <li><a href="{{ $ecChild->getUrl() }}" class="text-sm text-ink-600 hover:text-brand-600">{{ $ecChild->name }}</a></li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -170,7 +170,7 @@
                                 <div class="hidden group-hover:block absolute start-0 top-full z-40">
                                     <div class="bg-white shadow-lift border-t-2 border-brand-500 py-1 min-w-[200px]">
                                         @foreach ($url['childs'] as $item)
-                                            <a class="block px-4 py-2 text-sm text-ink-700 hover:bg-brand-50 hover:text-brand-800" {{ ($item['data']['target'] == '_blank') ? 'target=_blank' : '' }} href="{{ gp247_url_render($item['data']['url']) }}">{{ gp247_language_render($item['data']['name']) }}</a>
+                                            <a class="block px-4 py-2 text-sm text-ink-700 hover:bg-brand-50 hover:text-brand-700" {{ ($item['data']['target'] == '_blank') ? 'target=_blank' : '' }} href="{{ gp247_url_render($item['data']['url']) }}">{{ gp247_language_render($item['data']['name']) }}</a>
                                         @endforeach
                                     </div>
                                 </div>
@@ -189,9 +189,9 @@
              x-transition:enter="transition ease-out duration-200" x-transition:enter-start="-translate-x-full rtl:translate-x-full" x-transition:enter-end="translate-x-0"
              x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full rtl:translate-x-full"
              class="drawer-panel drawer-panel-start overflow-y-auto" @keydown.escape.window="mobileMenuOpen = false">
-            <div class="flex items-center justify-between bg-gradient-to-r from-brand-500 to-brand-600 px-4 py-4 text-white">
+            <div class="flex items-center justify-between bg-gradient-to-r from-brand-500 to-brand-550 px-4 py-4 text-white">
                 <a href="{{ $ecLoggedIn ? gp247_route_front('customer.index') : gp247_route_front('customer.login') }}" class="flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-600">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-550">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
                     </span>
                     <span class="text-sm font-semibold">{{ $ecLoggedIn ? gp247_language_render('customer.my_profile') : gp247_language_render('front.login') }}</span>

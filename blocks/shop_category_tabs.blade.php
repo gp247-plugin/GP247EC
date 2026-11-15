@@ -23,7 +23,7 @@
                 @foreach ($ecTabs as $i => $ecTab)
                     <button type="button" role="tab" @click="tab = {{ $i }}" :aria-selected="(tab === {{ $i }}).toString()"
                         class="shrink-0 border-b-2 px-3 py-3 text-sm font-semibold transition"
-:class="tab === {{ $i }} ? 'border-brand-500 text-brand-800' : 'border-transparent text-ink-500 hover:text-ink-900'">
+:class="tab === {{ $i }} ? 'border-brand-500 text-brand-700' : 'border-transparent text-ink-500 hover:text-ink-900'">
                         {{ $ecTab['category']->name }}
                     </button>
                 @endforeach

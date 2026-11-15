@@ -14,7 +14,7 @@
 @endphp
 <style>
     footer[role="contentinfo"] .gp247-footer-links__link { color: #3f3f46; }
-    footer[role="contentinfo"] .gp247-footer-links__link:hover { color: #ea580c; }
+    footer[role="contentinfo"] .gp247-footer-links__link:hover { color: #ea6f1f; }
 </style>
 
 <section class="mt-8 border-y border-ink-200 bg-white" aria-label="{{ $ecT('trust_support') }}">
@@ -48,13 +48,13 @@
         </div>
 
         <div>
-            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-600">{{ $ecT('contact') }}</h3>
+            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-550">{{ $ecT('contact') }}</h3>
             <ul class="space-y-2.5 text-sm">
                 @if (gp247_store_info(key: 'address', default: null))
                     <li><span class="text-ink-500">{{ gp247_language_render('store.address') }}:</span> <span class="text-ink-800">{{ gp247_store_info(key: 'address', default: null) }}</span></li>
                 @endif
                 @if (gp247_store_info(key: 'long_phone', default: null))
-                    <li><span class="text-ink-500">{{ gp247_language_render('store.hotline') }}:</span> <span class="font-semibold text-brand-700">{{ gp247_store_info(key: 'long_phone', default: null) }}</span></li>
+                    <li><span class="text-ink-500">{{ gp247_language_render('store.hotline') }}:</span> <span class="font-semibold text-brand-600">{{ gp247_store_info(key: 'long_phone', default: null) }}</span></li>
                 @endif
                 @if (gp247_store_info(key: 'email', default: null))
                     <li><span class="text-ink-500">{{ gp247_language_render('store.email') }}:</span> <span class="text-ink-800">{{ gp247_store_info(key: 'email', default: null) }}</span></li>
@@ -63,12 +63,12 @@
         </div>
 
         <div>
-            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-600">{{ gp247_language_render('front.link_useful') }}</h3>
+            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-550">{{ gp247_language_render('front.link_useful') }}</h3>
             <div class="text-sm"><x-gp247-front::footer-links /></div>
         </div>
 
         <div>
-            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-600">{{ $ecT('follow_us') }}</h3>
+            <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-550">{{ $ecT('follow_us') }}</h3>
             <div class="flex items-center gap-2">
                 @foreach ([
                     'facebook_url' => ['Facebook', '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'],
@@ -84,12 +84,12 @@
                 @endforeach
             </div>
             @if (gp247_config('fanpage_url'))
-                <a target="_blank" rel="noopener" href="{{ gp247_config('fanpage_url') }}" class="mt-4 inline-block text-sm text-ink-700 hover:text-brand-600">Fanpage</a>
+                <a target="_blank" rel="noopener" href="{{ gp247_config('fanpage_url') }}" class="mt-4 inline-block text-sm text-ink-700 hover:text-brand-550">Fanpage</a>
             @endif
         </div>
     </div>
 
-    <div class="bg-brand-600 text-brand-50">
+    <div class="bg-brand-550 text-brand-50">
         <div class="container-x flex flex-col md:flex-row items-center justify-between gap-2 py-4 text-xs">
             {{-- WHY: the "hide footer copyright" admin toggle gates both lines. --}}
             @if (!gp247_config('hidden_copyright_footer'))

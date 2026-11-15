@@ -86,7 +86,7 @@
                 @if (gp247_config('product_brand') && !empty($product->brand->name))
                     <span class="h-3 w-px bg-ink-300"></span>
                     <span>{{ gp247_language_render('product.brand') }}:
-                        <span id="product-detail-brand"><a class="font-semibold text-brand-700 hover:underline" href="{{ $product->brand->getUrl() }}">{{ $product->brand->name }}</a></span>
+                        <span id="product-detail-brand"><a class="font-semibold text-brand-600 hover:underline" href="{{ $product->brand->getUrl() }}">{{ $product->brand->name }}</a></span>
                     </span>
                 @endif
                 @if (gp247_config('product_stock'))
@@ -115,7 +115,7 @@
                 <dd class="text-ink-800">
                     {{-- WHY: category names are text a user typed — print them with {{ }}, never glued into raw HTML. --}}
                     @foreach ($product->categories as $category)
-                        <a class="hover:text-brand-700" href="{{ $category->getUrl() }}">{{ $category->getTitle() }}</a>@if (!$loop->last), @endif
+                        <a class="hover:text-brand-600" href="{{ $category->getUrl() }}">{{ $category->getTitle() }}</a>@if (!$loop->last), @endif
                     @endforeach
                 </dd>
                 @if (gp247_config('product_available') && $product->date_available >= date('Y-m-d H:i:s'))
@@ -164,7 +164,7 @@
                             <span class="block h-16 w-16 overflow-hidden rounded-sm border border-ink-200 bg-white">{!! gp247_image_render($build->product->image) !!}</span>
                             <span class="absolute -top-1.5 -end-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-ink-900 text-brand-300 text-[10px] font-bold flex items-center justify-center">{{ gp247_qty_format($build->quantity) }}</span>
                         </span>
-                        <span class="text-xs text-ink-600 clamp-2 group-hover:text-brand-700">{{ $build->product->getName() }}</span>
+                        <span class="text-xs text-ink-600 clamp-2 group-hover:text-brand-600">{{ $build->product->getName() }}</span>
                     </a>
                     @endforeach
                 </div>
@@ -206,7 +206,7 @@
         <div class="ec-bar px-4 py-3">
             <h2 class="text-sm font-bold uppercase tracking-wide text-ink-900">{{ gp247_language_render('product.description') }}</h2>
         </div>
-        <div class="p-4 sm:p-6 text-sm text-ink-700 leading-relaxed space-y-3 [&_a]:text-brand-700 [&_img]:rounded-sm [&_img]:max-w-full">
+        <div class="p-4 sm:p-6 text-sm text-ink-700 leading-relaxed space-y-3 [&_a]:text-brand-600 [&_img]:rounded-sm [&_img]:max-w-full">
             {!! gp247_html_render($product->content) !!}
         </div>
     </div>

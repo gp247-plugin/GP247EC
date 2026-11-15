@@ -18,7 +18,7 @@
                     {{ trans('Templates/GP247EC::lang.ec.filter') }}
                 </span>
                 @if ($ecFiltered)
-                <button type="button" wire:click="clearFilters" class="text-xs font-semibold text-brand-700 hover:text-brand-800" data-testid="shop-product-filter-clear">
+                <button type="button" wire:click="clearFilters" class="text-xs font-semibold text-brand-600 hover:text-brand-700" data-testid="shop-product-filter-clear">
                     {{ gp247_language_render('filter_sort.clear') }}
                 </button>
                 @endif
@@ -53,7 +53,7 @@
                         <button type="button"
                             wire:click="toggleBrand('{{ e($brandItem->alias) }}')"
                             aria-pressed="{{ $brandActive ? 'true' : 'false' }}"
-                            class="flex w-full items-center gap-2.5 rounded-sm px-1 py-1.5 text-sm text-start transition {{ $brandActive ? 'font-semibold text-brand-800' : 'text-ink-700 hover:text-brand-700' }}"
+                            class="flex w-full items-center gap-2.5 rounded-sm px-1 py-1.5 text-sm text-start transition {{ $brandActive ? 'font-semibold text-brand-700' : 'text-ink-700 hover:text-brand-600' }}"
                             data-testid="shop-product-filter-brand">
                             <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border {{ $brandActive ? 'border-brand-500 bg-brand-500 text-white' : 'border-ink-300 bg-white' }}">
                                 @if ($brandActive)

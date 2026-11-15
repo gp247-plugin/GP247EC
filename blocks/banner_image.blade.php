@@ -1,13 +1,13 @@
 {{--
     GP247-EC home hero — marketplace layout: the "banner" slider takes two thirds,
-    a side column holds two promo tiles (the store's "banner-store" image when it
-    has one, and a "hot deals" tile linking to all products). On phones only the
-    slider shows. Slides keep the click-tracking route and drag/swipe behaviour of
-    the default slider (gp247ecBannerSlider in js/app.js).
+    a side column holds two promo tiles taken from the store's "Banner store"
+    banners (see the side-tile note below). On phones only the slider shows.
+    Slides keep the click-tracking route and drag/swipe behaviour of the default
+    slider (gp247ecBannerSlider in js/app.js).
 --}}
 @php
     $banners = $modelBanner->start()->setType('banner')->getData();
-    $ecStoreBanner = $modelBanner->start()->setType('banner-store')->getData()->first();
+    $ecSideBanners = $modelBanner->start()->setType('banner-store')->getData()->take(2)->values();
 @endphp
 @if ($banners->count())
 <section class="container-x pt-3 sm:pt-4">
@@ -60,28 +60,53 @@
             @endif
         </div>
 
-        {{-- WHY absolute: the side tiles must take the slider's height, not push the row taller with their image's natural height. --}}
+        {{--
+            Side tiles: the store's first two "Banner store" banners (admin → Banner,
+            ordered by Sort, smallest first). The banner image fills the tile and its HTML,
+            if any, is drawn on top (an HTML-only banner gets the orange gradient);
+            a banner URL makes the tile a tracked link.
+            Missing banner → built-in fallback: tile 1 = store name, tile 2 = "Hot deals"
+            linking to all products.
+            WHY absolute: the tiles must take the slider's height, not push the row
+            taller with their image's natural height.
+        --}}
         <div class="relative hidden lg:block">
         <div class="absolute inset-0 grid grid-rows-2 gap-3">
-            @if ($ecStoreBanner && $ecStoreBanner->image)
-                <a href="{{ $ecStoreBanner->url ? gp247_route_front('front.banner.click', ['id' => $ecStoreBanner->id]) : gp247_route_front('product.all') }}" class="relative block min-h-0 overflow-hidden rounded bg-ink-900">
-                    <img src="{{ gp247_file($ecStoreBanner->image) }}" alt="{{ $ecStoreBanner->name }}" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition duration-300" loading="lazy">
-                </a>
-            @else
-                <div class="min-h-0 rounded bg-brand-700 p-6 flex flex-col justify-center">
-                    <p class="text-xs font-bold uppercase tracking-widest text-brand-100">{{ gp247_store_info(key: 'name', default: null) }}</p>
-                    <p class="mt-2 text-lg font-bold text-white clamp-2">{{ gp247_language_quickly('front.welcome_message', 'Welcome') }}</p>
-                </div>
-            @endif
-            <a href="{{ gp247_route_front('product.all') }}" class="relative flex min-h-0 flex-col justify-center overflow-hidden rounded bg-gradient-to-br from-brand-500 to-brand-800 p-6 text-white hover:from-brand-600 transition">
-                <span class="text-xs font-bold uppercase tracking-widest text-brand-100">{{ trans('Templates/GP247EC::lang.ec.sale') }}</span>
-                <span class="mt-1 text-2xl font-extrabold">{{ trans('Templates/GP247EC::lang.ec.deals') }}</span>
-                <span class="mt-3 inline-flex w-max items-center gap-1 rounded-sm bg-white px-3 py-1.5 text-xs font-bold text-brand-700">
-                    {{ trans('Templates/GP247EC::lang.ec.view_all') }}
-                    <svg class="w-3.5 h-3.5 rtl-flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                </span>
-                <svg class="absolute -end-6 -bottom-6 w-32 h-32 text-white/10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
-            </a>
+            @foreach ([0, 1] as $ecTileIndex)
+                @php
+                    $ecTile = $ecSideBanners->get($ecTileIndex);
+                    $ecTileHref = ($ecTile && $ecTile->url) ? gp247_route_front('front.banner.click', ['id' => $ecTile->id]) : null;
+                @endphp
+                @if ($ecTile && ($ecTile->html || $ecTile->image))
+                    <{{ $ecTileHref ? 'a' : 'div' }} @if ($ecTileHref) href="{{ $ecTileHref }}" target="{{ $ecTile->target ?: '_self' }}" @endif
+                        class="group/tile relative block min-h-0 overflow-hidden rounded bg-gradient-to-br from-brand-500 to-brand-700 text-white"
+                        data-testid="storefront-home-side-banner">
+                        @if ($ecTile->image)
+                            <img src="{{ gp247_file($ecTile->image) }}" alt="{{ $ecTile->name }}" class="absolute inset-0 w-full h-full object-cover transition duration-300 {{ $ecTileHref ? 'group-hover/tile:scale-105' : '' }}" loading="lazy">
+                        @endif
+                        @if ($ecTile->html)
+                            <div class="relative flex h-full flex-col justify-center p-6">
+                                {!! gp247_html_render($ecTile->html) !!}
+                            </div>
+                        @endif
+                    </{{ $ecTileHref ? 'a' : 'div' }}>
+                @elseif ($ecTileIndex === 0)
+                    <div class="min-h-0 rounded bg-brand-600 p-6 flex flex-col justify-center">
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-100">{{ gp247_store_info(key: 'name', default: null) }}</p>
+                        <p class="mt-2 text-lg font-bold text-white clamp-2">{{ gp247_language_quickly('front.welcome_message', 'Welcome') }}</p>
+                    </div>
+                @else
+                    <a href="{{ gp247_route_front('product.all') }}" class="relative flex min-h-0 flex-col justify-center overflow-hidden rounded bg-gradient-to-br from-brand-500 to-brand-700 p-6 text-white hover:from-brand-550 transition">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-100">{{ trans('Templates/GP247EC::lang.ec.sale') }}</span>
+                        <span class="mt-1 text-2xl font-extrabold">{{ trans('Templates/GP247EC::lang.ec.deals') }}</span>
+                        <span class="mt-3 inline-flex w-max items-center gap-1 rounded-sm bg-white px-3 py-1.5 text-xs font-bold text-brand-600">
+                            {{ trans('Templates/GP247EC::lang.ec.view_all') }}
+                            <svg class="w-3.5 h-3.5 rtl-flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                        </span>
+                        <svg class="absolute -end-6 -bottom-6 w-32 h-32 text-white/10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+                    </a>
+                @endif
+            @endforeach
         </div>
         </div>
     </div>

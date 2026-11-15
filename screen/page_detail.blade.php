@@ -20,7 +20,7 @@ $layout_page = front_page_detail
         <div class="border-b border-ink-100 px-5 py-4">
             <h1 class="section-title">{{ $title ?? ($page->name ?? "") }}</h1>
         </div>
-        <div class="px-5 py-6 sm:px-8 text-ink-700 leading-relaxed space-y-3 [&_a]:text-brand-700 [&_img]:max-w-full [&_img]:rounded-sm">
+        <div class="px-5 py-6 sm:px-8 text-ink-700 leading-relaxed space-y-3 [&_a]:text-brand-600 [&_img]:max-w-full [&_img]:rounded-sm">
             {!! gp247_html_render($page->content ?? '') !!}
         </div>
     </article>

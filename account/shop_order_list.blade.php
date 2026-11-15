@@ -37,7 +37,7 @@
                         <td class="px-4 py-3"><span class="badge-brand">{{ $statusOrder[$order->status] }}</span></td>
                         <td class="px-4 py-3 text-ink-500">{{ $order->created_at }}</td>
                         <td class="px-4 py-3 text-end">
-                            <a href="{{ gp247_route_front('customer.order_detail', ['id' => $order->id]) }}" class="text-brand-700 font-medium">{{ gp247_language_render('order.detail') }}</a>
+                            <a href="{{ gp247_route_front('customer.order_detail', ['id' => $order->id]) }}" class="text-brand-600 font-medium">{{ gp247_language_render('order.detail') }}</a>
                         </td>
                     </tr>
                 @endforeach

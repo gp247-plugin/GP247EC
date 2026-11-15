@@ -15,7 +15,7 @@
                     <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ink-100 group-hover:bg-brand-100 transition">
                         <img src="{{ gp247_file($category->getThumb()) }}" alt="{{ $category->name }}" class="h-9 w-9 object-contain" loading="lazy">
                     </span>
-                    <span class="text-xs text-center text-ink-800 clamp-2 group-hover:text-brand-700">{{ $category->name }}</span>
+                    <span class="text-xs text-center text-ink-800 clamp-2 group-hover:text-brand-600">{{ $category->name }}</span>
                 </a>
             @endforeach
         </div>

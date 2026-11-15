@@ -192,7 +192,7 @@
     <div class="divider my-6"></div>
 
     <div class="text-center text-sm">
-        <a href="{{ gp247_route_front('customer.login') }}" class="font-semibold text-brand-700 hover:text-brand-800">{{ gp247_language_render('front.login') }}</a>
+        <a href="{{ gp247_route_front('customer.login') }}" class="font-semibold text-brand-600 hover:text-brand-700">{{ gp247_language_render('front.login') }}</a>
     </div>
 </div>
 </div>

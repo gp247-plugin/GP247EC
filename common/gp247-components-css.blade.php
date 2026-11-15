@@ -2,10 +2,10 @@
 :root {
     --gp247-color-text: #3f3f46;
     --gp247-color-link: #3f3f46;
-    --gp247-color-link-hover: #c2410c;
+    --gp247-color-link-hover: #c2560f;
     --gp247-color-border: #d4d4d8;
     --gp247-color-bg-menu: #ffffff;
-    --gp247-color-active: #ea580c;
+    --gp247-color-active: #ea6f1f;
     --gp247-font-size: 13px;
     --gp247-spacing: 8px;
 }
@@ -185,7 +185,7 @@
 }
 /* GP247-EC: switchers sit on the orange top strip — light toggle text there. */
 .ec-topbar .gp247-language-switcher__toggle,
-.ec-topbar .gp247-currency-switcher__toggle { color: #ffedd5; }
+.ec-topbar .gp247-currency-switcher__toggle { color: #ffeedd; }
 .ec-topbar .gp247-language-switcher__toggle:hover,
 .ec-topbar .gp247-currency-switcher__toggle:hover { color: #ffffff; }
 </style>

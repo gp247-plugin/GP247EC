@@ -32,17 +32,21 @@ export default {
         extend: {
             colors: {
                 // Orange — the template's main tone: header, primary actions, highlights.
+                // Orange. 500 / 550 = surfaces (header, bars, gradients); 600+ = text and
+                // buttons with white text — 600 #c2560f reaches 4.5:1 on white because
+                // plugin views use text-brand-600 / bg-brand-600 as their accent.
                 brand: {
-                    50: '#fff7ed',
-                    100: '#ffedd5',
-                    200: '#fed7aa',
-                    300: '#fdba74',
-                    400: '#fb923c',
-                    500: '#f97316',
-                    600: '#ea580c',
-                    700: '#c2410c',
-                    800: '#9a3412',
-                    900: '#7c2d12',
+                    50: '#fff8f1',
+                    100: '#ffeedd',
+                    200: '#ffd9b5',
+                    300: '#ffbf88',
+                    400: '#ffa35a',
+                    500: '#fb8a3c',
+                    550: '#ea6f1f',
+                    600: '#c2560f',
+                    700: '#9a4410',
+                    800: '#7a3612',
+                    900: '#5c290d',
                 },
                 // Crimson — discounts, sale ribbons, urgency.
                 accent: {
