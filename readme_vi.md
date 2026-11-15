@@ -12,6 +12,8 @@ Khác với `GP247Front` (view nằm rải ở hai package `gp247/front` và `gp
 tập trung trong một thư mục**: layout, trang front, trang shop, tài khoản khách, đăng nhập/đăng ký, giỏ hàng,
 thanh toán (Livewire), email, component, CSS/JS nguồn và bản đã build.
 
+**Xem demo:** <https://store.s-cart.org/>
+
 ![Trang chủ GP247-EC](screenshots/home.jpg)
 
 | Mục | Giá trị |

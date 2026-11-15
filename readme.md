@@ -12,6 +12,8 @@ Unlike `GP247Front` (whose views are spread across the `gp247/front` and `gp247/
 GP247-EC lives in one folder**: layout, front pages, shop pages, customer account, login/register, cart, checkout
 (Livewire), emails, components, CSS/JS sources and the compiled bundle.
 
+**Live demo:** <https://store.s-cart.org/>
+
 ![GP247-EC home page](screenshots/home.jpg)
 
 | Item | Value |
