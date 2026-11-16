@@ -23,6 +23,15 @@
             'availability' => $product->allowSale() ? 'InStock' : 'OutOfStock',
             'imageUrl'     => gp247_file($product->getImage()),
             'description'  => $product->description,
+            // Identifiers, promotion end and the id rating resolvers are asked with;
+            // WHY method_exists: an older gp247/shop has no promotionValidUntil().
+            'sku'             => $product->sku,
+            'brand'           => $product->brand->name ?? null,
+            'gtin12'          => $product->upc,
+            'gtin13'          => $product->ean ?: $product->jan,
+            'mpn'             => $product->mpn,
+            'priceValidUntil' => method_exists($product, 'promotionValidUntil') ? $product->promotionValidUntil() : null,
+            'productId'       => (string) $product->id,
         ];
         $breadcrumbItems = array_map(
             fn ($item) => ['name' => $item['title'], 'url' => $item['url'] ?: null],
