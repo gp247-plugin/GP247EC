@@ -189,6 +189,29 @@ class AppConfig extends ExtensionConfigDefault
         }
     }
 
+    /**
+     * Sample banners a store gets when it starts using GP247-EC: [name, picture in public/images/banner, type, html].
+     *
+     * WHY these pictures: the S-Cart sample catalogue is electronics, so the banners show the same kind of products.
+     * The home slider shows a banner's HTML instead of its picture, so the two "banner" slides carry no HTML; the
+     * two "banner-store" side tiles draw their HTML over the picture (same markup as the built-in "Hot deals" tile).
+     *
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string}>
+     */
+    public static function sampleBanners(): array
+    {
+        $tile = fn (string $eyebrow, string $title) => '<span class="text-xs font-bold uppercase tracking-widest text-brand-100">'
+            .e($eyebrow).'</span><span class="mt-1 text-2xl font-extrabold">'.e($title).'</span>';
+
+        return [
+            ['Banner home 1', 'ec-hero-1.jpg', 'banner', ''],
+            ['Banner home 2', 'ec-hero-2.jpg', 'banner', ''],
+            ['Banner store 1', 'ec-side-1.jpg', 'banner-store', $tile('Wearables', 'New arrivals')],
+            ['Banner store 2', 'ec-side-2.jpg', 'banner-store', $tile('Smart living', 'Smart home')],
+            ['Banner breadcrumb', 'ec-breadcrumb.jpg', 'breadcrumb', ''],
+        ];
+    }
+
     // Setup for store
 
     public function setupStore($storeId = null)
@@ -334,10 +357,20 @@ class AppConfig extends ExtensionConfigDefault
             // the owning store is set on the banner row itself (no pivot insert).
             $modelBanner = new FrontBanner;
 
-            $modelBanner->create(['id' => $this->uuid(), 'name' => 'Banner home 1 ('.$this->configKey.')', 'image' => 'https://static.gp247.net/file/s-cart/where/large/pic1.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'banner', 'store_id' => $storeId]);
-            $modelBanner->create(['id' => $this->uuid(), 'name' => 'Banner home 2 ('.$this->configKey.')', 'image' => 'https://static.gp247.net/file/s-cart/where/large/pic2.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'banner', 'store_id' => $storeId]);
-            $modelBanner->create(['id' => $this->uuid(), 'name' => 'Banner breadcrumb ('.$this->configKey.')', 'image' => 'https://static.gp247.net/file/s-cart/where/large/pic3.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'breadcrumb', 'store_id' => $storeId]);
-            $modelBanner->create(['id' => $this->uuid(), 'name' => 'Banner store ('.$this->configKey.')', 'image' => 'https://static.gp247.net/file/s-cart/where/large/pic4.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'banner-store', 'store_id' => $storeId]);
+            foreach (self::sampleBanners() as $sort => [$name, $file, $type, $html]) {
+                $modelBanner->create([
+                    // WHY sort: banners are listed by sort; equal values would show slides and tiles in random order.
+                    'sort' => $sort,
+                    'id' => $this->uuid(),
+                    'name' => $name.' ('.$this->configKey.')',
+                    'image' => '/GP247/Templates/'.$this->configKey.'/images/banner/'.$file,
+                    'target' => '_self',
+                    'html' => $html,
+                    'status' => 1,
+                    'type' => $type,
+                    'store_id' => $storeId,
+                ]);
+            }
         } else {
             return null;
         }
