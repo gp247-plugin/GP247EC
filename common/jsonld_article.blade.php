@@ -1,21 +1,12 @@
 {{--
     JSON-LD — Article schema.
 
-    Expects variables passed via @push('jsonld') from the content screen view:
-      $jsonldArticle (array): {
-          headline, url, imageUrl?, datePublished?, dateModified?, description
-      }
+    Delegates to gp247/front's own partial so this template always gets the current
+    Article fields (publisher, author, empty-description handling — modification
+    20261117T055341) and keeps working on an older front: copying the builder call
+    here would pass named arguments an older SeoMeta does not have.
+
+    Expects $jsonldArticle (array) pushed by the content screen:
+      headline, url, imageUrl?, datePublished?, dateModified?, description?, author?
 --}}
-@if(!empty($jsonldArticle))
-@php
-    $articleJsonLd = \GP247\Front\Library\SeoMeta::buildArticleJsonLd(
-        headline:      $jsonldArticle['headline']      ?? '',
-        url:           $jsonldArticle['url']           ?? request()->url(),
-        imageUrl:      $jsonldArticle['imageUrl']      ?? null,
-        datePublished: $jsonldArticle['datePublished'] ?? null,
-        dateModified:  $jsonldArticle['dateModified']  ?? null,
-        description:   $jsonldArticle['description']   ?? null,
-    );
-@endphp
-<script type="application/ld+json">{!! $articleJsonLd !!}</script>
-@endif
+@include('GP247TemplatePath::GP247Front.common.jsonld_article')
