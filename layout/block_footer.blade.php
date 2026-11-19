@@ -91,6 +91,11 @@
 
     <div class="bg-brand-550 text-brand-50">
         <div class="container-x flex flex-col md:flex-row items-center justify-between gap-2 py-4 text-xs">
+            {{-- "Cookie settings": shown by the consent loader of gp247/front when the cookie banner is on
+                 (source: gp247/front GP247Front/layout/block_footer.blade.php). WHY class_exists: older fronts have no banner. --}}
+            @if (class_exists(\GP247\Front\TemplateComponents\ConsentBanner::class))
+                <button type="button" class="font-semibold text-white hover:underline" data-gp247-consent-open data-testid="tracking-consent-footer-settings" hidden>{{ gp247_language_render('front.consent.settings') }}</button>
+            @endif
             {{-- WHY: the "hide footer copyright" admin toggle gates both lines. --}}
             @if (!gp247_config('hidden_copyright_footer'))
                 <p>&copy; {{ date('Y') }} {{ gp247_store_info(key: 'name', default: null) }}. All rights reserved.</p>
