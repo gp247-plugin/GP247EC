@@ -4,7 +4,7 @@
 
 **English** · [Tiếng Việt](readme_vi.md) · [日本語](readme_ja.md)
 
-GP247-EC is a **free** storefront template for GP247 / S-Cart with a **marketplace** look in **orange**:
+GP247-EC is a **free** storefront template for S-Cart with a **marketplace** look in **orange**:
 a three-tier orange header with a wide search box and a category bar, a home page made of dense product shelves,
 product cards with discount tags, a filter sidebar on listings, a table-style cart and a numbered checkout stepper.
 Behaviour (Livewire, routes, data) is the same as the default `GP247Front` template.

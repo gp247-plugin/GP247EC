@@ -4,7 +4,7 @@
 
 [English](readme.md) · **Tiếng Việt** · [日本語](readme_ja.md)
 
-GP247-EC là template storefront **miễn phí** cho GP247 / S-Cart, giao diện **marketplace** tông **cam**:
+GP247-EC là template storefront **miễn phí** cho S-Cart, giao diện **marketplace** tông **cam**:
 header cam 3 tầng với ô tìm kiếm lớn và thanh danh mục, trang chủ dạng các "kệ" sản phẩm dày, thẻ sản phẩm có nhãn
 giảm giá, cột bộ lọc bên trái ở trang danh sách, giỏ hàng dạng bảng và thanh toán có thanh tiến trình đánh số.
 Phần chức năng (Livewire, route, dữ liệu) giữ nguyên như template mặc định `GP247Front`.
