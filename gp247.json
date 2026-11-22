@@ -7,7 +7,7 @@
     "configGroup": "Templates",
     "configCode": "GP247EC",
     "configKey": "GP247EC",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "requireCore": ["3.13"],
     "minUpdateFrom": "1.0",
     "requireComposerPackages": ["gp247/front", "gp247/shop"],

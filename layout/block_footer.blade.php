@@ -70,22 +70,28 @@
         <div>
             <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-550">{{ $ecT('follow_us') }}</h3>
             <div class="flex items-center gap-2">
+                {{-- WHY fallback: a site not yet updated by gp247:update still names the Facebook
+                     group link fanpage_url (renamed to group_url by a gp247/core upgrade migration). --}}
+                @php
+                    $ecGroupUrl = gp247_config('group_url') ?: gp247_config('fanpage_url');
+                @endphp
                 @foreach ([
                     'facebook_url' => ['Facebook', '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'],
+                    'group_url' => ['Facebook Group', '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'],
                     'twitter_url' => ['X', '<path d="M4 4l16 16M20 4L4 20"/>'],
                     'instagram_url' => ['Instagram', '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>'],
                     'youtube_url' => ['YouTube', '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0.46 5.33A2.78 2.78 0 0 0 3.4 19.3c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2.02A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><path d="M9.75 15.02V8.48L15.5 11.75z"/>'],
                 ] as $ecCfg => [$ecLabel, $ecSvg])
-                    @if (gp247_config($ecCfg))
-                        <a target="_blank" rel="noopener" href="{{ gp247_config($ecCfg) }}" aria-label="{{ $ecLabel }}" class="flex h-9 w-9 items-center justify-center rounded border border-ink-300 bg-white text-ink-600 hover:border-brand-500 hover:bg-brand-500 hover:text-white transition">
+                    @php
+                        $ecUrl = $ecCfg === 'group_url' ? $ecGroupUrl : gp247_config($ecCfg);
+                    @endphp
+                    @if ($ecUrl)
+                        <a target="_blank" rel="noopener" href="{{ $ecUrl }}" aria-label="{{ $ecLabel }}" class="flex h-9 w-9 items-center justify-center rounded border border-ink-300 bg-white text-ink-600 hover:border-brand-500 hover:bg-brand-500 hover:text-white transition">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $ecSvg !!}</svg>
                         </a>
                     @endif
                 @endforeach
             </div>
-            @if (gp247_config('fanpage_url'))
-                <a target="_blank" rel="noopener" href="{{ gp247_config('fanpage_url') }}" class="mt-4 inline-block text-sm text-ink-700 hover:text-brand-550">Fanpage</a>
-            @endif
         </div>
     </div>
 
