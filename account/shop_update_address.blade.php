@@ -41,6 +41,21 @@
         </div>
     @endif
 
+    @if (class_exists(\GP247\Shop\Address\View\AddressBlock::class))
+        {{-- Address fields: gp247/shop's shared block (searchable, dependent lists when an address plugin
+             serves the country). A shop without the block keeps the typed fields below. --}}
+        @include(gp247_shop_process_view($GP247TemplatePath, 'common.shop_address_fields'), [
+            'addressBlock' => \GP247\Shop\Address\View\AddressBlock::for(
+                old('country', $address['country']),
+                \GP247\Shop\Address\AddressForm::CONTEXT_ADDRESS_BOOK,
+                values: $address->only(['city', 'district', 'ward', 'address1', 'address2', 'address3', 'country', 'postcode']),
+                meta: $address->address_meta,
+            ),
+            'testidPrefix' => 'account-address',
+            'countries' => $countries,
+            'errorClass' => 'text-xs text-accent-600 mt-1',
+        ])
+    @else
     @if (gp247_config('customer_postcode'))
         <div>
             <label class="label">{{ gp247_language_render('customer.postcode') }}</label>
@@ -108,6 +123,7 @@
             </select>
             @error('country')<p class="text-xs text-accent-600 mt-1">{{ $message }}</p>@enderror
         </div>
+    @endif
     @endif
 
     @if ($address->id != $customer->address_id)

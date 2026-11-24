@@ -108,6 +108,24 @@
                 @error('phone')<p class="text-xs text-accent-600 mt-1">{{ $message }}</p>@enderror
             </div>
             @endif
+            @if (class_exists(\GP247\Shop\Address\View\AddressBlock::class))
+                {{-- Address fields: gp247/shop's shared block (searchable, dependent lists when an address plugin
+                     serves the country). A shop without the block keeps the typed fields below. --}}
+                @include(gp247_shop_process_view($GP247TemplatePath, 'common.shop_address_fields'), [
+                    'addressBlock' => \GP247\Shop\Address\View\AddressBlock::for(
+                        $country !== '' ? $country : null,
+                        \GP247\Shop\Address\AddressForm::CONTEXT_CHECKOUT,
+                        mode: \GP247\Shop\Address\View\AddressBlock::MODE_LIVEWIRE,
+                        wire: array_combine(\GP247\Shop\Address\AddressForm::FIELD_ORDER, \GP247\Shop\Address\AddressForm::FIELD_ORDER),
+                        codesPath: 'addressCodes',
+                    ),
+                    'testidPrefix' => 'checkout-address',
+                    'wrapperClass' => 'grid sm:grid-cols-2 gap-4 sm:col-span-2',
+                    'wideFields' => ['address1'],
+                    'countries' => $countries,
+                    'errorClass' => 'text-xs text-accent-600 mt-1',
+                ])
+            @else
             @if ($fieldConfig['country']['show'])
             <div>
                 <label class="label">{{ gp247_language_render('cart.country') }} @if ($fieldConfig['country']['required'])<span class="text-accent-600">*</span>@endif</label>
@@ -170,6 +188,7 @@
                 <input type="text" wire:model="address3" class="input @error('address3') input-error @enderror">
                 @error('address3')<p class="text-xs text-accent-600 mt-1">{{ $message }}</p>@enderror
             </div>
+            @endif
             @endif
             @if ($fieldConfig['company']['show'])
             <div>

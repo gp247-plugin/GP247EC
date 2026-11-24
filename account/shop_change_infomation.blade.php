@@ -60,6 +60,28 @@
         </div>
     @endif
 
+    @if (class_exists(\GP247\Shop\Address\View\AddressBlock::class))
+        {{-- Address fields: gp247/shop's shared block (searchable, dependent lists when an address plugin
+             serves the country). A shop without the block keeps the typed fields below. --}}
+        @include(gp247_shop_process_view($GP247TemplatePath, 'common.shop_address_fields'), [
+            'addressBlock' => \GP247\Shop\Address\View\AddressBlock::for(
+                old('country', $customer['country']),
+                \GP247\Shop\Address\AddressForm::CONTEXT_CUSTOMER_EDIT,
+                values: collect($customer)->only(['city', 'district', 'ward', 'address1', 'address2', 'address3', 'country', 'postcode'])->all(),
+                meta: $customer['address_meta'] ?? null,
+            ),
+            'testidPrefix' => 'account-profile',
+            'countries' => $countries,
+            'errorClass' => 'text-xs text-accent-600 mt-1',
+        ])
+    @if (gp247_config('customer_company'))
+        <div>
+            <label class="label">{{ gp247_language_render('customer.company') }}</label>
+            <input type="text" class="input @error('company') input-error @enderror" name="company" value="{{ old('company', $customer['company']) }}">
+            @error('company')<p class="text-xs text-accent-600 mt-1">{{ $message }}</p>@enderror
+        </div>
+    @endif
+    @else
     @if (gp247_config('customer_postcode'))
         <div>
             <label class="label">{{ gp247_language_render('customer.postcode') }}</label>
@@ -135,6 +157,7 @@
             </select>
             @error('country')<p class="text-xs text-accent-600 mt-1">{{ $message }}</p>@enderror
         </div>
+    @endif
     @endif
 
     @if (gp247_config('customer_sex'))
