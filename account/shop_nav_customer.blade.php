@@ -28,6 +28,13 @@
         <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 118 0v4"/></svg>
         {{ gp247_language_render('customer.change_password') }}
     </a>
+    @if (\Illuminate\Support\Facades\Route::has('customer.privacy'))
+        {{-- "My data": download or delete my data (platforms that have it). --}}
+        <a href="{{ gp247_route_front('customer.privacy') }}" class="sidebar-link {{ request()->routeIs('customer.privacy') ? 'active' : '' }}" data-testid="customer-privacy-nav">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-4z"/><path d="M12 8v6m-3-3l3 3 3-3"/></svg>
+            {{ gp247_language_render('customer.privacy.title') }}
+        </a>
+    @endif
     @if (function_exists('mfa_get_guard_config') && mfa_get_guard_config('customer')['enabled'])
         <a href="{{ gp247_route_front('mfa.manage', ['guard' => 'customer']) }}" class="sidebar-link">
             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-4z"/></svg>
