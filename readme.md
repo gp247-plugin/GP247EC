@@ -23,6 +23,15 @@ GP247-EC lives in one folder**: layout, front pages, shop pages, customer accoun
 | Requires | `gp247/core` 3.13+, `gp247/front`, `gp247/shop` |
 | License | Free |
 
+## What's new in 1.0.7
+- **My data, delete my account** — the account area has **My data**: customers download a copy of their data and delete their account
+  (with a waiting time they can call off); while the account waits to be deleted, the account area shows a notice with a call-off button.
+  Shoppers without an account ask for a copy or for deletion on the **Your personal data** page (`/privacy-request`). The emails use the
+  GP247-EC design. Needs S-Cart 3.12 or later; older versions do not show it.
+- **Province and ward picked from a list** — with an address plugin, the registration, account, address book and checkout pages let
+  customers type to search and pick their country, province / city and ward / commune. A shop without the shared address block keeps the
+  typed fields.
+
 ## Screenshots
 
 | Product listing (filter sidebar) | Product detail | Phone |

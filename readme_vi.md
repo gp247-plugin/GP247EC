@@ -23,6 +23,14 @@ thanh toán (Livewire), email, component, CSS/JS nguồn và bản đã build.
 | Yêu cầu | `gp247/core` 3.13+, `gp247/front`, `gp247/shop` |
 | Giấy phép | Miễn phí |
 
+## Có gì mới ở 1.0.7
+- **Dữ liệu của tôi, xoá tài khoản** — khu tài khoản có mục **Dữ liệu của tôi**: khách tải bản sao dữ liệu và xoá tài khoản (có thời gian chờ,
+  huỷ được); khi tài khoản đang chờ xoá, đầu khu tài khoản có thông báo và nút huỷ. Khách không có tài khoản xin bản sao hoặc xin xoá qua
+  trang **Dữ liệu cá nhân của bạn** (`/privacy-request`). Email thông báo theo giao diện GP247-EC. Cần S-Cart 3.12 trở lên; bản cũ hơn không
+  hiện mục này.
+- **Chọn tỉnh, phường từ danh sách** — khi cửa hàng có plugin địa chỉ, các trang đăng ký, thông tin tài khoản, sổ địa chỉ và đặt hàng cho
+  khách gõ để tìm rồi chọn quốc gia, tỉnh/thành phố, phường/xã. Cửa hàng chưa có khối địa chỉ dùng chung vẫn dùng ô nhập như trước.
+
 ## Ảnh demo
 
 | Danh sách sản phẩm (bộ lọc bên trái) | Chi tiết sản phẩm | Điện thoại |
